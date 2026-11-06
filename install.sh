@@ -104,6 +104,11 @@ if [ "$(id -u)" -eq 0 ]; then
 elif command -v sudo >/dev/null 2>&1; then
     if sudo -n true 2>/dev/null; then
         CAN_SUDO=true
+    elif [ -e /dev/tty ]; then
+        log_info "Prompting for sudo to install system-wide into /opt/LinUwU (or decline to install into ~/.local)..."
+        if sudo -v </dev/tty 2>/dev/null; then
+            CAN_SUDO=true
+        fi
     fi
 fi
 
@@ -274,29 +279,72 @@ if [ -f "$TARGET_DIR/chrome_crashpad_handler" ]; then
     $SUDO_CMD chmod +x "$TARGET_DIR/chrome_crashpad_handler"
 fi
 
-# Create native Wayland auto-detection wrapper
+# Check for missing dynamic libraries
+if command -v ldd >/dev/null 2>&1 && [ -n "$MAIN_EXE" ] && [ -f "$MAIN_EXE" ]; then
+    MISSING_LIBS=$(ldd "$MAIN_EXE" 2>/dev/null | grep "not found" || true)
+    if [ -n "$MISSING_LIBS" ]; then
+        log_warn "Detected missing system shared libraries:"
+        echo -e "${C_YELLOW}${MISSING_LIBS}${C_RESET}"
+        log_warn "If ${APP_DISPLAY_NAME} fails to start, install the missing packages via your package manager."
+    fi
+fi
+
+# Create native Wayland and sandbox resilient wrapper
 WRAPPER_FILE="$TMP_DIR/linuwu-wrapper"
-cat << WRAPPER_EOF > "$WRAPPER_FILE"
+cat << 'WRAPPER_EOF' > "$WRAPPER_FILE"
 #!/bin/sh
 # LinUwU Launcher - The last launcher you will need
-# Native Wayland auto-detection wrapper
+# Distro-agnostic Wayland, X11 & Sandbox launcher wrapper
 
 EXTRA_ARGS=""
-if [ -n "\${WAYLAND_DISPLAY:-}" ]; then
-  # Use ozone-platform-hint=auto for safe native Wayland with seamless XWayland fallback
-  EXTRA_ARGS="--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations"
+
+# 1. Native Wayland auto-detection (safe auto hint with XWayland fallback)
+if [ -n "${WAYLAND_DISPLAY:-}" ]; then
+  EXTRA_ARGS="--ozone-platform-hint=auto"
 fi
 
-TARGET_BIN="${MAIN_EXE}"
-if [ ! -f "\$TARGET_BIN" ]; then
-  TARGET_BIN="${TARGET_DIR}/linuwu-launcher"
+# Locate executable
+TARGET_BIN="__MAIN_EXE__"
+if [ ! -f "$TARGET_BIN" ]; then
+  TARGET_BIN="__TARGET_DIR__/linuwu-launcher"
 fi
-if [ ! -f "\$TARGET_BIN" ]; then
-  TARGET_BIN="${TARGET_DIR}/heroic"
+if [ ! -f "$TARGET_BIN" ]; then
+  TARGET_BIN="__TARGET_DIR__/heroic"
+fi
+if [ ! -f "$TARGET_BIN" ]; then
+  SCRIPT_DIR="$(dirname "$(readlink -f "$0" 2>/dev/null || echo "$0")")"
+  TARGET_BIN="${SCRIPT_DIR}/linuwu-launcher"
 fi
 
-exec "\$TARGET_BIN" \$EXTRA_ARGS "\$@"
+# 2. Check chrome-sandbox / unprivileged user namespace availability
+TARGET_SANDBOX="$(dirname "$TARGET_BIN")/chrome-sandbox"
+USE_NO_SANDBOX=false
+
+# Check if unprivileged userns is restricted (e.g. Ubuntu 24.04+, Debian, AppArmor)
+if [ -f "/proc/sys/kernel/apparmor_restrict_unprivileged_userns" ] && [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns 2>/dev/null)" = "1" ]; then
+  USE_NO_SANDBOX=true
+elif [ -f "/proc/sys/kernel/unprivileged_userns_clone" ] && [ "$(cat /proc/sys/kernel/unprivileged_userns_clone 2>/dev/null)" = "0" ]; then
+  USE_NO_SANDBOX=true
+fi
+
+# If chrome-sandbox exists but is not setuid-root, Chromium will abort immediately unless --no-sandbox is given
+if [ -f "$TARGET_SANDBOX" ]; then
+  SANDBOX_UID="$(stat -c '%u' "$TARGET_SANDBOX" 2>/dev/null || echo "1000")"
+  if [ "$SANDBOX_UID" != "0" ] || [ ! -u "$TARGET_SANDBOX" ]; then
+    USE_NO_SANDBOX=true
+  fi
+fi
+
+if [ "$USE_NO_SANDBOX" = "true" ]; then
+  EXTRA_ARGS="$EXTRA_ARGS --no-sandbox"
+fi
+
+exec "$TARGET_BIN" $EXTRA_ARGS "$@"
 WRAPPER_EOF
+
+# Substitute placeholders
+sed -i "s|__MAIN_EXE__|${MAIN_EXE}|g" "$WRAPPER_FILE"
+sed -i "s|__TARGET_DIR__|${TARGET_DIR}|g" "$WRAPPER_FILE"
 
 chmod +x "$WRAPPER_FILE"
 $SUDO_CMD cp "$WRAPPER_FILE" "$BIN_DIR/linuwu"
@@ -331,6 +379,12 @@ if [ -n "$ICON_SRC" ]; then
     fi
 fi
 
+# Determine Exec command for desktop entry
+EXEC_CMD="${BIN_DIR}/linuwu"
+if [ "$INSTALL_MODE" = "system" ]; then
+    EXEC_CMD="/usr/bin/linuwu"
+fi
+
 # Create Desktop Entry
 DESKTOP_FILE="$TMP_DIR/linuwu.desktop"
 cat << DESKTOP_EOF > "$DESKTOP_FILE"
@@ -338,7 +392,7 @@ cat << DESKTOP_EOF > "$DESKTOP_FILE"
 Name=${APP_DISPLAY_NAME}
 GenericName=Game Launcher
 Comment=${APP_TAGLINE}
-Exec=${BIN_DIR}/linuwu %U
+Exec=${EXEC_CMD} %U
 Terminal=false
 Type=Application
 Icon=linuwu
@@ -361,6 +415,18 @@ fi
 
 echo ""
 log_success "${APP_DISPLAY_NAME} is successfully installed!"
+
+if [ "$INSTALL_MODE" = "user" ]; then
+    case ":$PATH:" in
+        *:"$BIN_DIR":*) ;;
+        *)
+            log_warn "$BIN_DIR is not currently in your system PATH."
+            log_warn "To run 'linuwu' directly from terminal, add it to your shell configuration:"
+            echo -e "  ${C_CYAN}echo 'export PATH=\"\$HOME/.local/bin:\$PATH\"' >> ~/.bashrc${C_RESET}"
+            ;;
+    esac
+fi
+
 echo -e "${C_BOLD}Launch LinUwU with:${C_RESET} ${C_CYAN}linuwu${C_RESET}"
 echo -e "${C_BOLD}Or open \"${APP_DISPLAY_NAME}\" from your application menu.${C_RESET}"
 echo -e "${C_MAGENTA}${APP_TAGLINE}.${C_RESET}\n"
