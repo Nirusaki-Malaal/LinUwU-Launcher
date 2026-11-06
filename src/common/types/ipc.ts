@@ -1,3 +1,4 @@
+import type { NexusXboxRequest, NexusXboxSnapshot } from './xbox'
 import type { OpenDialogOptions, TitleBarOverlay } from 'electron'
 
 import type { SystemInformation } from 'backend/utils/systeminfo'
@@ -153,6 +154,7 @@ interface TestSyncIPCFunctions {
 
 // ts-prune-ignore-next
 interface AsyncIPCFunctions {
+  nexusXbox: (request: NexusXboxRequest) => Promise<NexusXboxSnapshot>
   kill: (appName: string, runner: Runner) => Promise<void>
   checkDiskSpace: (folder: string) => Promise<DiskSpaceData>
   callTool: (args: Tools) => Promise<void>

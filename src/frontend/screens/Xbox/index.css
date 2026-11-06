@@ -1,0 +1,89 @@
+.XboxPage {
+  padding: var(--space-xl);
+  max-width: 1500px;
+  margin: auto;
+}
+.XboxPage > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+.XboxPage h1 {
+  margin: 0;
+}
+.XboxPage p {
+  color: var(--text-secondary);
+}
+.XboxPage__actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+.XboxPage__search {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  max-width: 380px;
+  margin: var(--space-lg) 0;
+}
+.XboxPage__search input {
+  padding: var(--space-sm);
+}
+.XboxPage__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-lg);
+}
+.XboxPage__game {
+  padding: var(--space-lg);
+  border: 1px solid var(--divider);
+  border-radius: 16px;
+  background: var(--background-secondary, var(--background));
+}
+.XboxPage__game h2 {
+  font-size: var(--body-lg);
+  overflow-wrap: anywhere;
+}
+.XboxPage__game img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.XboxPage__placeholder {
+  width: 100%;
+  height: 140px;
+  padding: 40px;
+  opacity: 0.5;
+}
+.XboxPage__compatibility {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+  font-size: var(--body-sm);
+}
+.XboxPage {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: start;
+  align-self: stretch;
+}
+.XboxPage > header > div {
+  flex: 1;
+}
+.XboxPage h1,
+.XboxPage h2 {
+  text-align: start;
+}
+.XboxPage__search input {
+  background: var(--background-secondary, var(--background));
+  color: var(--text-default);
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+}
+.XboxPage__compatibility input {
+  accent-color: var(--accent);
+}

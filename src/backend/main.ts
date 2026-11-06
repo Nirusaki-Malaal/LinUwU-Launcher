@@ -1,3 +1,4 @@
+import { nexusXboxRequest } from './xbox/nexus-client'
 import { initImagesCache } from './images_cache'
 import { fetchLastestReleases } from './utils/releases'
 import { DiskSpaceData, StatusPromise, WineInstallation } from 'common/types'
@@ -643,6 +644,7 @@ addHandler('getEpicGamesStatus', async () => isEpicServiceOffline())
 
 addHandler('getMaxCpus', () => cpus().length)
 
+addHandler('nexusXbox', (_event, request) => nexusXboxRequest(request))
 addHandler('getHeroicVersion', () => app.getVersion())
 addHandler('isFullscreen', () => isSteamDeckGameMode || isCLIFullscreen)
 addHandler('getGameOverride', async () =>

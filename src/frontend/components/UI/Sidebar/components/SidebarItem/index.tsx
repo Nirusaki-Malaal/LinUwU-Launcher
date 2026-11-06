@@ -43,6 +43,8 @@ export default function SidebarItem({
           className="Sidebar__item"
           onClick={onClick}
           data-tour={dataTour}
+          aria-label={label}
+          title={label}
         >
           {itemContent}
         </button>
@@ -58,6 +60,8 @@ export default function SidebarItem({
           to={url}
           onClick={onClick}
           data-tour={dataTour}
+          aria-label={label}
+          title={label}
         >
           {itemContent}
         </NavLink>

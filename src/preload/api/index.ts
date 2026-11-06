@@ -1,3 +1,4 @@
+import * as Xbox from './xbox'
 import * as Misc from './misc'
 import * as Helpers from './helpers'
 import * as Library from './library'
@@ -8,6 +9,7 @@ import * as DownloadManager from './downloadmanager'
 import * as Zoom from './zoom'
 
 export default {
+  ...Xbox,
   ...Misc,
   ...Helpers,
   ...Library,

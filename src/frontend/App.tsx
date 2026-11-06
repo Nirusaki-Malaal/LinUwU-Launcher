@@ -165,6 +165,10 @@ const router = createHashRouter([
         lazy: makeLazyFunc(import('./screens/Settings'))
       },
       {
+        path: 'xbox',
+        lazy: makeLazyFunc(import('./screens/Xbox'))
+      },
+      {
         path: 'wine-manager',
         lazy: makeLazyFunc(import('./screens/WineManager'))
       },

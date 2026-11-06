@@ -1,3 +1,5 @@
+import { faXbox } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   Gamepad2,
   Settings as SettingsIcon,
@@ -127,6 +129,14 @@ export default function SidebarLinks() {
           </div>
         )}
       </div>
+      {platform === 'linux' && (
+        <SidebarItem
+          url="/xbox"
+          icon={<FontAwesomeIcon icon={faXbox} />}
+          label="Xbox"
+          dataTour="sidebar-xbox"
+        />
+      )}
       <SidebarItem
         url="/discounts"
         icon={<Icon glyph={Tag} />}
