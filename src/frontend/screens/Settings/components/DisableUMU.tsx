@@ -11,10 +11,16 @@ const DisableUMU = () => {
   const { isDefault } = useContext(SettingsContext)
   const { platform } = useContext(ContextProvider)
 
+  const [compatibility] = useSetting('onlineFix', false)
   const [disableUMU, setDisableUMU] = useSetting('disableUMU', false)
   const [wineVersion] = useSetting('wineVersion', defaultWineVersion)
 
-  if (isDefault || platform !== 'linux' || wineVersion.type !== 'proton') {
+  if (
+    compatibility ||
+    isDefault ||
+    platform !== 'linux' ||
+    wineVersion.type !== 'proton'
+  ) {
     return <></>
   }
 

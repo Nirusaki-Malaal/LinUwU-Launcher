@@ -1,3 +1,5 @@
+import { needsHostSteamClient, steamClientLaunch } from './onlinefix/runtime'
+import { findSteamRoot } from './onlinefix/steam'
 import {
   CallRunnerOptions,
   GameInfo,
@@ -21,6 +23,7 @@ import { existsSync, mkdirSync } from 'graceful-fs'
 import { join, dirname, isAbsolute } from 'path'
 
 import {
+  getSteamLibraries,
   constructAndUpdateRPC,
   isEpicServiceOffline,
   quoteIfNecessary,
@@ -1516,10 +1519,24 @@ async function runWineCommand({
   }
 
   const wineBin = wineVersion.bin.replaceAll("'", '')
-  const umuSupported = await isUmuSupported(settings)
-  const runnerBin = umuSupported ? await getUmuPath() : wineBin
+  const steamClient = needsHostSteamClient(settings)
+    ? await steamClientLaunch(
+        settings,
+        commandParts,
+        protonVerb,
+        await findSteamRoot(),
+        await getSteamLibraries()
+      )
+    : undefined
+  const umuSupported = !steamClient && (await isUmuSupported(settings))
+  const runnerBin =
+    steamClient?.command ?? (umuSupported ? await getUmuPath() : wineBin)
+  if (steamClient) {
+    commandParts.splice(0, commandParts.length, ...steamClient.args)
+    Object.assign(env_vars, steamClient.environment)
+  }
 
-  if (wineVersion.type === 'proton' && !umuSupported) {
+  if (wineVersion.type === 'proton' && !umuSupported && !steamClient) {
     commandParts.unshift(protonVerb)
   }
 

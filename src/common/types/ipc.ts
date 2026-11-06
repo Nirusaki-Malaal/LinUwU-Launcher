@@ -1,3 +1,4 @@
+import type { SteamRuntimeStatus } from './steam-runtime'
 import type { NexusXboxRequest, NexusXboxSnapshot } from './xbox'
 import type { OpenDialogOptions, TitleBarOverlay } from 'electron'
 
@@ -154,6 +155,10 @@ interface TestSyncIPCFunctions {
 
 // ts-prune-ignore-next
 interface AsyncIPCFunctions {
+  getSteamRuntimeStatus: (args: {
+    appName: string
+    runner: Runner
+  }) => Promise<SteamRuntimeStatus>
   nexusXbox: (request: NexusXboxRequest) => Promise<NexusXboxSnapshot>
   kill: (appName: string, runner: Runner) => Promise<void>
   checkDiskSpace: (folder: string) => Promise<DiskSpaceData>

@@ -1,3 +1,4 @@
+import { needsHostSteamClient } from 'backend/onlinefix/runtime'
 import { GlobalConfig } from 'backend/config'
 import { logError, LogPrefix, logInfo } from 'backend/logger'
 import { execAsync, getSteamLibraries } from 'backend/utils'
@@ -584,6 +585,7 @@ export async function isUmuSupported(
 ): Promise<boolean> {
   if (!isLinux) return false
   if (gameSettings.wineVersion.type !== 'proton') return false
+  if (needsHostSteamClient(gameSettings)) return false
   if (gameSettings.disableUMU === true) {
     return false
   }

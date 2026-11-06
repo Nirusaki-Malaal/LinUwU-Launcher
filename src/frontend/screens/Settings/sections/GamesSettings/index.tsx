@@ -61,7 +61,8 @@ import FooterInfo from '../FooterInfo'
 import { GameInfo } from 'common/types'
 import DisableUMU from '../../components/DisableUMU'
 import VerboseLogs from '../../components/VerboseLogs'
-import OnlineFix from '../../components/OnlineFix'
+import GameCompatibility from '../../components/GameCompatibility'
+import SteamOverlay from '../../components/SteamOverlay'
 
 const windowsPlatforms = ['Win32', 'Windows', 'windows']
 function getStartingTab(platform: string, gameInfo?: GameInfo | null): string {
@@ -196,7 +197,7 @@ export default function GamesSettings() {
           <WinePrefix />
           <CrossoverBottle />
         </SettingsCard>
-        <OnlineFix />
+        <GameCompatibility />
         {!isCrossover && (
           <>
             <SettingsCard
@@ -241,6 +242,7 @@ export default function GamesSettings() {
         >
           {!isNative && <ShowFPS />}
           <Mangohud />
+          <SteamOverlay />
           <GameMode />
           <NvidiaPrime />
         </SettingsCard>
@@ -250,6 +252,7 @@ export default function GamesSettings() {
         >
           {isLinux && <PreferSystemLibs />}
           <SteamRuntime />
+          <DisableUMU />
           {!isNative && (
             <>
               <BattlEyeRuntime />
@@ -321,7 +324,6 @@ export default function GamesSettings() {
             )}
           </Alert>
           <EnableDXVKFpsLimit />
-          <DisableUMU />
         </TabPanel>
       )}
 

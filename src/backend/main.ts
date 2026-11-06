@@ -1,3 +1,4 @@
+import { steamRuntimeStatus } from './onlinefix/status'
 import { nexusXboxRequest } from './xbox/nexus-client'
 import { initImagesCache } from './images_cache'
 import { fetchLastestReleases } from './utils/releases'
@@ -644,6 +645,9 @@ addHandler('getEpicGamesStatus', async () => isEpicServiceOffline())
 
 addHandler('getMaxCpus', () => cpus().length)
 
+addHandler('getSteamRuntimeStatus', (_event, args) =>
+  steamRuntimeStatus(args.appName, args.runner)
+)
 addHandler('nexusXbox', (_event, request) => nexusXboxRequest(request))
 addHandler('getHeroicVersion', () => app.getVersion())
 addHandler('isFullscreen', () => isSteamDeckGameMode || isCLIFullscreen)

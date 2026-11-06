@@ -6,13 +6,12 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import SettingsContext from '../SettingsContext'
 import useSetting from 'frontend/hooks/useSetting'
 
-export default function OnlineFix() {
+export default function GameCompatibility() {
   const { t } = useTranslation()
   const { platform } = useContext(ContextProvider)
   const { isDefault, runner, isLinuxNative, gameInfo } =
     useContext(SettingsContext)
   const [enabled, setEnabled] = useSetting('onlineFix', false)
-  const [overlay, setOverlay] = useSetting('onlineFixSteamOverlay', false)
   if (
     platform !== 'linux' ||
     isDefault ||
@@ -24,34 +23,16 @@ export default function OnlineFix() {
   return (
     <SettingsCard
       glyph={Users}
-      title="OnlineFix"
-      description={t(
-        'setting.onlineFix.description',
-        'Play an installed OnlineFix game using this game’s selected Wine/Proton and prefix. Steam must be signed in.'
-      )}
+      title="OnlineFix compatibility"
+      description="Use this game's selected Wine/Proton and prefix. Steam must be signed in."
     >
       <ToggleSwitch
         htmlId="onlineFix"
         title={t('setting.onlineFix.enable', 'Enable OnlineFix support')}
-        description={t(
-          'setting.onlineFix.hint',
-          'Detect DLL overrides from the game folder and start Steam before launch. Your manual overrides take priority. Game files are not modified.'
-        )}
+        description="Configure compatibility automatically using your selected Wine/Proton and existing Steam installation."
         value={enabled}
         handleChange={() => setEnabled(!enabled)}
       />
-      {enabled && (
-        <ToggleSwitch
-          htmlId="onlineFixSteamOverlay"
-          title={t('setting.onlineFix.overlay', 'Enable Steam overlay')}
-          description={t(
-            'setting.onlineFix.overlayHint',
-            'Use Steam’s installed overlay libraries. Disable this if the overlay causes problems.'
-          )}
-          value={overlay}
-          handleChange={() => setOverlay(!overlay)}
-        />
-      )}
     </SettingsCard>
   )
 }

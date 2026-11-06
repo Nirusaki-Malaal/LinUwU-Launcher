@@ -28,7 +28,10 @@ import { isLinux, isMac } from 'backend/constants/environment'
 import { windowIcon } from 'backend/constants/paths'
 
 import type LogWriter from 'backend/logger/log_writer'
-import { onlineFixSettings, scanOnlineFix } from 'backend/onlinefix/onlinefix'
+import {
+  onlineFixSettings,
+  scanOnlineFix
+} from 'backend/onlinefix/compatibility'
 import {
   ensureOnlineFixSteam,
   steamOverlayLibraries

@@ -1,6 +1,9 @@
-import { useCallback, useContext } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SelectField } from 'frontend/components/UI'
+import ContextProvider from 'frontend/state/ContextProvider'
+import { defaultWineVersion } from '../util'
+import type { SteamRuntimeStatus } from 'common/types/steam-runtime'
+import { SettingRow, SelectField } from 'frontend/components/UI'
 import useSetting from 'frontend/hooks/useSetting'
 import SettingsContext from '../SettingsContext'
 import InfoIcon from 'frontend/components/UI/InfoIcon'
@@ -17,7 +20,41 @@ const RUNTIME_NAMES = {
 
 function SteamRuntime() {
   const { t } = useTranslation()
-  const { isLinuxNative } = useContext(SettingsContext)
+  const { isLinuxNative, appName, runner } = useContext(SettingsContext)
+  const { platform } = useContext(ContextProvider)
+  const [wine] = useSetting('wineVersion', defaultWineVersion)
+  const [compatibility] = useSetting('onlineFix', false)
+  const [disableUMU] = useSetting('disableUMU', false)
+  const [status, setStatus] = useState<SteamRuntimeStatus>()
+  useEffect(() => {
+    if (platform !== 'linux' || isLinuxNative) return
+    let cancelled = false
+    setStatus(undefined)
+    void window.api
+      .getSteamRuntimeStatus({ appName, runner: runner ?? 'sideload' })
+      .then((value) => {
+        if (!cancelled) setStatus(value)
+      })
+      .catch((error) => {
+        if (!cancelled)
+          setStatus({
+            name: 'Steam runtime unavailable',
+            ready: false,
+            detail: String(error)
+          })
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [
+    appName,
+    runner,
+    platform,
+    isLinuxNative,
+    wine.bin,
+    compatibility,
+    disableUMU
+  ])
   const [steamRuntime, setSteamRuntime] = useSetting('steamRuntime', false)
 
   const parseAndSet = useCallback(
@@ -36,7 +73,23 @@ function SteamRuntime() {
     [setSteamRuntime]
   )
 
-  if (!isLinuxNative) return <></>
+  if (platform !== 'linux') return null
+  if (!isLinuxNative)
+    return (
+      <SettingRow
+        label="Steam Linux Runtime"
+        description={
+          <>
+            {status?.detail || 'Checking the selected runtime…'}
+            {status?.path && (
+              <div style={{ overflowWrap: 'anywhere' }}>{status.path}</div>
+            )}
+          </>
+        }
+      >
+        <span role="status">{status?.name || 'Checking…'}</span>
+      </SettingRow>
+    )
 
   return (
     <>
