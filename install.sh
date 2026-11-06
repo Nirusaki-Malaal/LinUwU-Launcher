@@ -243,9 +243,12 @@ log_info "Installing files to ${TARGET_DIR}..."
 $SUDO_CMD mkdir -p "$TARGET_DIR" "$BIN_DIR" "$DESKTOP_DIR" "$ICON_DIR"
 
 # Stop running instances to avoid text file busy error
-killall heroic 2>/dev/null || true
-killall linuwu 2>/dev/null || true
+killall -9 linuwu-launcher linuwu heroic 2>/dev/null || true
+pkill -9 -f linuwu-launcher 2>/dev/null || true
 sleep 1
+
+# Unlink target binaries so cp never fails with "Text file busy"
+$SUDO_CMD rm -f "$TARGET_DIR/linuwu-launcher" "$TARGET_DIR/linuwu" "$TARGET_DIR/heroic" 2>/dev/null || true
 
 $SUDO_CMD cp -a "$INSTALLED_FILES_SRC"/* "$TARGET_DIR/"
 
