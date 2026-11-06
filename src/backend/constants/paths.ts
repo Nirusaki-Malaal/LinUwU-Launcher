@@ -1,5 +1,5 @@
 import { app } from 'electron'
-import { mkdirSync } from 'graceful-fs'
+import { cpSync, existsSync, mkdirSync } from 'graceful-fs'
 import { homedir } from 'os'
 import { join, resolve } from 'path'
 import { env } from 'process'
@@ -20,8 +20,45 @@ if (process.env.CI === 'e2e') {
 export const flatpakHome = env.XDG_DATA_HOME?.replace('/data', '') || homedir()
 export const userHome = homedir()
 
-export const appFolder = join(configFolder, 'heroic')
 export const userDataPath = app.getPath('userData')
+export const appFolder = userDataPath
+
+// Auto-migrate configuration from legacy ~/.config/heroic if needed
+const legacyHeroicFolder = join(configFolder, 'heroic')
+if (existsSync(legacyHeroicFolder) && legacyHeroicFolder !== appFolder) {
+  try {
+    const items = [
+      'config.json',
+      'GamesConfig',
+      'legendaryConfig',
+      'gogdlConfig',
+      'gog_store',
+      'nile_store',
+      'nile_config',
+      'sideload_apps',
+      'xbox',
+      'tools',
+      'themes',
+      'icons',
+      'images-cache',
+      'store',
+      'store_cache',
+      'areweanticheatyet.json',
+      'known_fixes.json',
+      'steamrip_catalog.json'
+    ]
+    for (const item of items) {
+      const src = join(legacyHeroicFolder, item)
+      const dst = join(appFolder, item)
+      if (existsSync(src) && !existsSync(dst)) {
+        cpSync(src, dst, { recursive: true })
+      }
+    }
+  } catch (err) {
+    console.warn('Heroic -> LinUwU auto-migration notice:', err)
+  }
+}
+
 export const toolsPath = join(appFolder, 'tools')
 export const runtimePath = join(toolsPath, 'runtimes')
 export const defaultUmuPath = join(runtimePath, 'umu', 'umu_run.py')
