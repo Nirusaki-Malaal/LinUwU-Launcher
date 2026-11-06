@@ -25,7 +25,7 @@ LinUwU Launcher is a high-performance gaming frontend for Linux, macOS, and Wind
 Install LinUwU on any Linux distribution (Arch Linux, Debian, Ubuntu, Fedora, openSUSE, Pop!_OS, Nobara, CachyOS, Void, etc.) with a single command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Nirusaki-Malaal/heroic-start-menu-fix/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Nirusaki-Malaal/LinUwU-Launcher/main/install.sh | bash
 ```
 
 ### Installer Highlights
@@ -88,8 +88,8 @@ curl -fsSL https://raw.githubusercontent.com/Nirusaki-Malaal/heroic-start-menu-f
 
 ```bash
 # Clone the repository
-git clone https://github.com/Nirusaki-Malaal/heroic-start-menu-fix.git
-cd heroic-start-menu-fix
+git clone https://github.com/Nirusaki-Malaal/LinUwU-Launcher.git
+cd LinUwU-Launcher
 
 # Install dependencies
 npm install

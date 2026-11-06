@@ -4,7 +4,7 @@
 # Universal Linux Installer Script
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/Nirusaki-Malaal/heroic-start-menu-fix/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/Nirusaki-Malaal/LinUwU-Launcher/main/install.sh | bash
 # Or:
 #   ./install.sh [--user | --system | --uninstall | --build]
 # ==============================================================================
@@ -15,7 +15,7 @@ APP_NAME="LinUwU"
 APP_DISPLAY_NAME="LinUwU Launcher"
 APP_TAGLINE="The last launcher you will need"
 REPO_OWNER="Nirusaki-Malaal"
-REPO_NAME="heroic-start-menu-fix"
+REPO_NAME="LinUwU-Launcher"
 GITHUB_REPO="https://github.com/${REPO_OWNER}/${REPO_NAME}.git"
 GITHUB_RAW="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main"
 API_LATEST_RELEASE="https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases/latest"
