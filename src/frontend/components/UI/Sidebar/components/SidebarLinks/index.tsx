@@ -1,30 +1,20 @@
 import {
-  BookOpen,
   Gamepad2,
   Settings as SettingsIcon,
   Store,
   LogIn,
   Accessibility,
-  Coffee,
   UserCircle,
   Wine,
   Download,
   Tag,
   Tv
 } from 'lucide-react'
-import {
-  faDiscord,
-  faGithub,
-  faPatreon
-} from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useLocation } from 'react-router-dom'
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { openDiscordLink } from 'frontend/helpers'
 import ContextProvider from 'frontend/state/ContextProvider'
 import QuitButton from '../QuitButton'
-import { SHOW_EXTERNAL_LINK_DIALOG_STORAGE_KEY } from 'frontend/components/UI/ExternalLinkDialog'
 import SidebarItem from '../SidebarItem'
 import { Icon } from 'frontend/components/UI'
 
@@ -32,16 +22,8 @@ export default function SidebarLinks() {
   const { t } = useTranslation()
   const location = useLocation() as { pathname: string }
 
-  const {
-    amazon,
-    epic,
-    gog,
-    zoom,
-    platform,
-    refreshLibrary,
-    libraryStatus,
-    handleExternalLinkDialog
-  } = useContext(ContextProvider)
+  const { amazon, epic, gog, zoom, platform, refreshLibrary, libraryStatus } =
+    useContext(ContextProvider)
 
   const activeDownloads = libraryStatus.filter(
     (st) => st.status === 'installing' || st.status === 'queued'
@@ -68,21 +50,6 @@ export default function SidebarLinks() {
       return refreshLibrary({ runInBackground: true })
     }
     return
-  }
-
-  function handleExternalLink(linkCallback: () => void) {
-    const showDialogSetting = localStorage.getItem(
-      SHOW_EXTERNAL_LINK_DIALOG_STORAGE_KEY
-    )
-    const showExternalLinkDialog = showDialogSetting
-      ? (JSON.parse(showDialogSetting) as boolean)
-      : true
-
-    if (showExternalLinkDialog) {
-      handleExternalLinkDialog({ showDialog: true, linkCallback })
-    } else {
-      linkCallback()
-    }
   }
 
   // By default, open Epic Store
@@ -230,45 +197,6 @@ export default function SidebarLinks() {
           />
         </>
       )}
-
-      <div className="Sidebar__sectionLabel">{t('Community', 'Community')}</div>
-
-      <SidebarItem
-        url="/wiki"
-        icon={<Icon glyph={BookOpen} />}
-        label={t('docs', 'Documentation')}
-        dataTour="sidebar-docs"
-      />
-
-      <div data-tour="sidebar-community">
-        <SidebarItem
-          elementType="button"
-          onClick={() => handleExternalLink(openDiscordLink)}
-          icon={<FontAwesomeIcon icon={faDiscord} />}
-          label={t('userselector.discord', 'Discord')}
-        />
-
-        <SidebarItem
-          elementType="button"
-          onClick={() => handleExternalLink(window.api.openPatreonPage)}
-          icon={<FontAwesomeIcon icon={faPatreon} />}
-          label="Patreon"
-        />
-
-        <SidebarItem
-          elementType="button"
-          onClick={() => handleExternalLink(window.api.openKofiPage)}
-          icon={<Icon glyph={Coffee} />}
-          label="Ko-fi"
-        />
-
-        <SidebarItem
-          elementType="button"
-          onClick={() => handleExternalLink(window.api.openGithubSponsorsPage)}
-          icon={<FontAwesomeIcon icon={faGithub} />}
-          label="GitHub Sponsors"
-        />
-      </div>
     </div>
   )
 }

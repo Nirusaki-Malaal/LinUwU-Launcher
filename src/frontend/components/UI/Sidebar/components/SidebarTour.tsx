@@ -112,22 +112,6 @@ const SidebarTour: React.FC = () => {
       position
     },
     {
-      element: '[data-tour="sidebar-docs"]',
-      intro: t(
-        'tour.sidebar.docs',
-        'Read documentation for help with using Heroic.'
-      ),
-      position
-    },
-    {
-      element: '[data-tour="sidebar-community"]',
-      intro: t(
-        'tour.sidebar.community',
-        "Join our community on Discord and support Heroic's development."
-      ),
-      position
-    },
-    {
       element: '[data-tour="sidebar-quit"]',
       intro: t('tour.sidebar.quit', 'Exit the application safely.'),
       position
