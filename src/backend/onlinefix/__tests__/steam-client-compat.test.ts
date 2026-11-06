@@ -1,7 +1,12 @@
 import fs from 'fs/promises'
 import { tmpdir } from 'os'
 import { join } from 'path'
-import { steamClientLaunch, needsHostSteamClient } from '../runtime'
+import {
+  steamClientLaunch,
+  needsHostSteamClient,
+  onlineFixOverlayAppId,
+  onlineFixSteamIdentity
+} from '../runtime'
 import {
   scanOnlineFix,
   onlineFixSettings,
@@ -93,6 +98,73 @@ test('ordinary Proton games and Wine retain their launch mode', () => {
       wineVersion: { ...proton.wineVersion, type: 'wine' }
     })
   ).toBe(false)
+})
+test('aligns every Steam identity with the OnlineFix overlay app id', () => {
+  const settings = {
+    onlineFix: true,
+    onlineFixSteamOverlay: true,
+    enviromentOptions: [{ key: 'SteamOverlayGameId', value: '1091500' }]
+  } as GameSettings
+  expect(onlineFixSteamIdentity(settings)).toEqual({
+    STEAM_COMPAT_APP_ID: '1091500',
+    SteamAppId: '1091500',
+    SteamGameId: '1091500'
+  })
+})
+test('does not touch the launch identity without an active overlay', () => {
+  const settings = {
+    onlineFix: true,
+    onlineFixSteamOverlay: false,
+    enviromentOptions: [{ key: 'SteamOverlayGameId', value: '480' }]
+  } as GameSettings
+  expect(onlineFixSteamIdentity(settings)).toBeUndefined()
+  expect(
+    onlineFixOverlayAppId({
+      ...settings,
+      onlineFixSteamOverlay: true,
+      enviromentOptions: [{ key: 'steamoverlaygameid', value: ' 480 ' }]
+    })
+  ).toBe('480')
+})
+test('uses the fake app id for the overlay and keeps an explicit id', () => {
+  const settings = {
+    onlineFix: true,
+    onlineFixSteamOverlay: true,
+    enviromentOptions: [] as GameSettings['enviromentOptions']
+  } as GameSettings
+  const generated = onlineFixSettings(
+    settings,
+    { overrides: {}, fakeAppId: '1091500' },
+    ['/steam/ubuntu12_64/gameoverlayrenderer.so']
+  )
+  expect(generated.enviromentOptions).toContainEqual({
+    key: 'SteamOverlayGameId',
+    value: '1091500'
+  })
+  expect(onlineFixSteamIdentity(generated)).toEqual({
+    STEAM_COMPAT_APP_ID: '1091500',
+    SteamAppId: '1091500',
+    SteamGameId: '1091500'
+  })
+
+  const explicit = onlineFixSettings(
+    {
+      ...settings,
+      enviromentOptions: [{ key: 'steamoverlaygameid', value: '480' }]
+    },
+    { overrides: {}, fakeAppId: '1091500' },
+    ['/steam/ubuntu12_64/gameoverlayrenderer.so']
+  )
+  expect(onlineFixSteamIdentity(explicit)).toEqual({
+    STEAM_COMPAT_APP_ID: '480',
+    SteamAppId: '480',
+    SteamGameId: '480'
+  })
+  expect(
+    explicit.enviromentOptions?.filter(
+      ({ key }) => key.toLowerCase() === 'steamoverlaygameid'
+    )
+  ).toEqual([{ key: 'steamoverlaygameid', value: '480' }])
 })
 test('detects DLL names without opening any Online-prefixed contents', async () => {
   for (const name of [

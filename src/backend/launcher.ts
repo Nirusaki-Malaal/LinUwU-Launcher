@@ -1,4 +1,8 @@
-import { needsHostSteamClient, steamClientLaunch } from './onlinefix/runtime'
+import {
+  needsHostSteamClient,
+  onlineFixSteamIdentity,
+  steamClientLaunch
+} from './onlinefix/runtime'
 import { findSteamRoot } from './onlinefix/steam'
 import {
   CallRunnerOptions,
@@ -1112,6 +1116,9 @@ function setupWrapperEnvVars(wrapperEnv: WrapperEnv) {
  */
 function setupWineEnvVars(gameSettings: GameSettings, gameId = '0') {
   const { wineVersion, winePrefix, wineCrossoverBottle } = gameSettings
+  const steamIdentity = onlineFixSteamIdentity(gameSettings)
+  const overlayUsesXWayland =
+    isLinux && wineVersion.type === 'proton' && Boolean(steamIdentity)
 
   const ret: Record<string, string> = {}
 
@@ -1186,7 +1193,7 @@ function setupWineEnvVars(gameSettings: GameSettings, gameId = '0') {
   if (isLinux && !gameSettings.enableFsync && wineVersion.type === 'proton') {
     ret.PROTON_NO_FSYNC = '1'
   }
-  if (isLinux && gameSettings.enableWineWayland) {
+  if (isLinux && gameSettings.enableWineWayland && !overlayUsesXWayland) {
     if (wineVersion.type === 'proton') {
       ret.PROTON_ENABLE_WAYLAND = '1'
       if (gameSettings.enableHDR) {
@@ -1198,6 +1205,11 @@ function setupWineEnvVars(gameSettings: GameSettings, gameId = '0') {
         ret.DXVK_HDR = '1'
       }
     }
+  }
+  if (overlayUsesXWayland) {
+    // Steam's overlay is an X11 client. Native Wayland surfaces cannot host
+    // it, which otherwise opens the overlay in separate windows.
+    ret.PROTON_ENABLE_WAYLAND = '0'
   }
   if (isLinux && gameSettings.enableWoW64) {
     if (wineVersion.type === 'proton') {
@@ -1232,10 +1244,19 @@ function setupWineEnvVars(gameSettings: GameSettings, gameId = '0') {
   }
   if (wineVersion.type === 'proton') {
     // If we don't set this, GE-Proton tries to guess the AppID from the prefix path, which doesn't work in our case
-    ret.STEAM_COMPAT_APP_ID = process.env.STEAM_COMPAT_APP_ID || '0'
-    ret.SteamAppId = process.env.SteamAppId || ret.STEAM_COMPAT_APP_ID
+    ret.STEAM_COMPAT_APP_ID =
+      steamIdentity?.STEAM_COMPAT_APP_ID ||
+      process.env.STEAM_COMPAT_APP_ID ||
+      '0'
+    ret.SteamAppId =
+      steamIdentity?.SteamAppId ||
+      process.env.SteamAppId ||
+      ret.STEAM_COMPAT_APP_ID
     // This sets the name of the log file given when setting PROTON_LOG=1
-    ret.SteamGameId = process.env.SteamGameId || `heroic-${gameId}`
+    ret.SteamGameId =
+      steamIdentity?.SteamGameId ||
+      process.env.SteamGameId ||
+      `heroic-${gameId}`
     ret.PROTON_LOG_DIR = flatpakHome
     // add back default wine/dxvk debug logging
     if (gameSettings?.verboseLogs) {

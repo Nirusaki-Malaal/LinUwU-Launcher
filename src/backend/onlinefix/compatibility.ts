@@ -106,7 +106,10 @@ export function onlineFixSettings(
       ].join(':')
     )
     env.set('ENABLE_VK_LAYER_VALVE_steam_overlay_1', '1')
-    if (!env.has('SteamOverlayGameId'))
+    const existingOverlayGameId = [...env.keys()].find(
+      (key) => key.toLowerCase() === 'steamoverlaygameid'
+    )
+    if (!existingOverlayGameId)
       env.set('SteamOverlayGameId', scan.fakeAppId ?? '480')
   }
   return {

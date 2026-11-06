@@ -11,6 +11,43 @@ const runtimeTools: Record<string, string> = {
   '4185400': 'SteamLinuxRuntime_4-arm64'
 }
 
+/** The overlay app id is only meaningful after OnlineFix has injected the
+ * overlay environment. Reading it from the generated settings also means a
+ * missing gameoverlayrenderer.so never changes the launch mode. */
+export function onlineFixOverlayAppId(
+  settings: Pick<
+    GameSettings,
+    'onlineFix' | 'onlineFixSteamOverlay' | 'enviromentOptions'
+  >
+): string | undefined {
+  if (!settings.onlineFix || !settings.onlineFixSteamOverlay) return
+  const entry = settings.enviromentOptions?.find(
+    ({ key }) => key.toLowerCase() === 'steamoverlaygameid'
+  )
+  const appId = entry?.value.trim()
+  return appId || undefined
+}
+
+/** Steam's overlay, Proton and the game must all agree on one app id. Heroic
+ * otherwise launches with SteamAppId=0 while the overlay uses a fake id, which
+ * makes Steam attach the overlay incorrectly (duplicate windows). */
+export function onlineFixSteamIdentity(
+  settings: Pick<
+    GameSettings,
+    'onlineFix' | 'onlineFixSteamOverlay' | 'enviromentOptions'
+  >
+):
+  | { STEAM_COMPAT_APP_ID: string; SteamAppId: string; SteamGameId: string }
+  | undefined {
+  const appId = onlineFixOverlayAppId(settings)
+  if (!appId) return
+  return {
+    STEAM_COMPAT_APP_ID: appId,
+    SteamAppId: appId,
+    SteamGameId: appId
+  }
+}
+
 /** UMU intentionally clears the host Steam directory; Steam-dependent DLLs need
  * Proton's normal Steam-client setup, inside Valve's installed runtime. */
 export function needsHostSteamClient(

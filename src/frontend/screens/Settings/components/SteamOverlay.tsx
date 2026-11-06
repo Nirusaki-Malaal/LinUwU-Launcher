@@ -20,7 +20,7 @@ export default function SteamOverlay() {
     <ToggleSwitch
       htmlId="onlineFixSteamOverlay"
       title="Enable Steam overlay"
-      description="Use Steam's installed overlay for this compatibility-enabled game."
+      description="Use Steam's installed overlay for this compatibility-enabled game. The overlay runs through XWayland, so native Wine Wayland is disabled while this is on."
       value={overlay}
       handleChange={() => setOverlay(!overlay)}
     />
