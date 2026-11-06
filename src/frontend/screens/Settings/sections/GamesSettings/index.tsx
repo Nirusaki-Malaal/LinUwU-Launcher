@@ -61,6 +61,7 @@ import FooterInfo from '../FooterInfo'
 import { GameInfo } from 'common/types'
 import DisableUMU from '../../components/DisableUMU'
 import VerboseLogs from '../../components/VerboseLogs'
+import OnlineFix from '../../components/OnlineFix'
 
 const windowsPlatforms = ['Win32', 'Windows', 'windows']
 function getStartingTab(platform: string, gameInfo?: GameInfo | null): string {
@@ -195,6 +196,7 @@ export default function GamesSettings() {
           <WinePrefix />
           <CrossoverBottle />
         </SettingsCard>
+        <OnlineFix />
         {!isCrossover && (
           <>
             <SettingsCard

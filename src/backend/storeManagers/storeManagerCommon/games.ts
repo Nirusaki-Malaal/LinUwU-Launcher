@@ -28,6 +28,11 @@ import { isLinux, isMac } from 'backend/constants/environment'
 import { windowIcon } from 'backend/constants/paths'
 
 import type LogWriter from 'backend/logger/log_writer'
+import { onlineFixSettings, scanOnlineFix } from 'backend/onlinefix/onlinefix'
+import {
+  ensureOnlineFixSteam,
+  steamOverlayLibraries
+} from 'backend/onlinefix/steam'
 import { Game } from '../../../common/types/game_manager'
 
 async function getAppSettings(appName: string): Promise<GameSettings> {
@@ -145,13 +150,47 @@ export async function launchGame(
     })
   }
 
-  const gameSettings = await getAppSettings(appName)
+  let gameSettings = await getAppSettings(appName)
   const { launcherArgs } = gameSettings
   const extraArgs = [...shlex.split(launcherArgs ?? ''), ...args]
   const extraArgsJoined = extraArgs.join(' ')
 
   if (executable) {
     const isNative = game.isNative()
+    if (
+      isLinux &&
+      runner === 'sideload' &&
+      !isNative &&
+      gameSettings.onlineFix
+    ) {
+      try {
+        const root =
+          gameInfo.install.install_path ||
+          gameInfo.folder_name ||
+          dirname(executable)
+        const detected = await scanOnlineFix(root)
+        const steamRoot = await ensureOnlineFixSteam()
+        gameSettings = onlineFixSettings(
+          gameSettings,
+          detected,
+          gameSettings.onlineFixSteamOverlay
+            ? await steamOverlayLibraries(steamRoot)
+            : []
+        )
+        await logWriter.logInfo(
+          `OnlineFix: detected ${Object.keys(detected.overrides).length} DLL overrides in ${root}. Using ${gameSettings.wineVersion.name}.`
+        )
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error)
+        await logWriter.logError(`OnlineFix: ${message}`)
+        showDialogBoxModalAuto({
+          title: 'OnlineFix could not prepare this game',
+          message,
+          type: 'ERROR'
+        })
+        return false
+      }
+    }
     const {
       success: launchPrepSuccess,
       failureReason: launchPrepFailReason,

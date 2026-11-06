@@ -37,3 +37,6 @@ flatpak-build
 .env
 
 playwright-report
+
+# Local Playwright verification output
+/test-results/

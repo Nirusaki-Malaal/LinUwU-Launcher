@@ -235,6 +235,8 @@ export interface GameInfo {
 }
 
 export interface GameSettings {
+  onlineFix?: boolean
+  onlineFixSteamOverlay?: boolean
   autoInstallDxvk: boolean
   autoInstallVkd3d: boolean
   autoInstallDxvkNvapi: boolean
