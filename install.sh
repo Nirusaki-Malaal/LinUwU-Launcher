@@ -176,19 +176,19 @@ if [ -z "$INSTALLED_FILES_SRC" ] && [ "$FORCE_BUILD" = false ]; then
     if command -v curl >/dev/null 2>&1; then
         LATEST_JSON=$(curl -fsSL "$API_LATEST_RELEASE" 2>/dev/null || true)
         if [ -n "$LATEST_JSON" ]; then
-            LATEST_TAR_URL=$(echo "$LATEST_JSON" | grep -o 'https://[^" ]*linux[^" ]*\.tar\.xz' | head -n 1 || true)
+            LATEST_TAR_URL=$(echo "$LATEST_JSON" | grep -o 'https://[^" ]*linux[^" ]*\.tar\.[a-zA-Z0-9]*' | head -n 1 || true)
         fi
     fi
 
     if [ -n "$LATEST_TAR_URL" ]; then
         log_info "Found prebuilt release package: ${LATEST_TAR_URL}"
-        log_info "Downloading release..."
-        curl -fsSL "$LATEST_TAR_URL" -o "$TMP_DIR/linuwu.tar.xz"
+        log_info "Downloading release package..."
+        curl -fSL "$LATEST_TAR_URL" -o "$TMP_DIR/linuwu-archive"
         log_info "Extracting package..."
         mkdir -p "$TMP_DIR/unpacked"
-        tar -xf "$TMP_DIR/linuwu.tar.xz" -C "$TMP_DIR/unpacked"
+        tar -xf "$TMP_DIR/linuwu-archive" -C "$TMP_DIR/unpacked"
         # Find directory containing executable
-        BIN_FOUND=$(find "$TMP_DIR/unpacked" -type f \( -name "heroic" -o -name "linuwu" \) | head -n 1 || true)
+        BIN_FOUND=$(find "$TMP_DIR/unpacked" -type f \( -name "linuwu-launcher" -o -name "heroic" -o -name "linuwu" \) | head -n 1 || true)
         if [ -n "$BIN_FOUND" ]; then
             INSTALLED_FILES_SRC="$(dirname "$BIN_FOUND")"
         fi
@@ -280,10 +280,14 @@ cat << WRAPPER_EOF > "$WRAPPER_FILE"
 
 EXTRA_ARGS=""
 if [ -n "\${WAYLAND_DISPLAY:-}" ]; then
-  EXTRA_ARGS="--ozone-platform=wayland"
+  # Use ozone-platform-hint=auto for safe native Wayland with seamless XWayland fallback
+  EXTRA_ARGS="--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations"
 fi
 
 TARGET_BIN="${MAIN_EXE}"
+if [ ! -f "\$TARGET_BIN" ]; then
+  TARGET_BIN="${TARGET_DIR}/linuwu-launcher"
+fi
 if [ ! -f "\$TARGET_BIN" ]; then
   TARGET_BIN="${TARGET_DIR}/heroic"
 fi
@@ -298,6 +302,13 @@ $SUDO_CMD chmod +x "$BIN_DIR/linuwu"
 # Symlink legacy heroic name for compatibility
 $SUDO_CMD ln -sf "$BIN_DIR/linuwu" "$BIN_DIR/linuwu-launcher"
 $SUDO_CMD ln -sf "$BIN_DIR/linuwu" "$BIN_DIR/heroic" 2>/dev/null || true
+
+# If installed system-wide, also ensure /usr/bin/linuwu exists so Plasma/systemd always finds it
+if [ "$INSTALL_MODE" = "system" ]; then
+    $SUDO_CMD ln -sf "$BIN_DIR/linuwu" "/usr/bin/linuwu" 2>/dev/null || true
+    $SUDO_CMD ln -sf "$BIN_DIR/linuwu" "/usr/bin/linuwu-launcher" 2>/dev/null || true
+    $SUDO_CMD ln -sf "$BIN_DIR/linuwu" "/usr/bin/heroic" 2>/dev/null || true
+fi
 
 # Install App Icon
 ICON_SRC=""
@@ -324,11 +335,11 @@ cat << DESKTOP_EOF > "$DESKTOP_FILE"
 Name=${APP_DISPLAY_NAME}
 GenericName=Game Launcher
 Comment=${APP_TAGLINE}
-Exec=linuwu %U
+Exec=${BIN_DIR}/linuwu %U
 Terminal=false
 Type=Application
 Icon=linuwu
-StartupWMClass=LinUwU
+StartupWMClass=linuwu-launcher
 Categories=Game;
 MimeType=x-scheme-handler/heroic;x-scheme-handler/linuwu;
 Keywords=game;launcher;epic;gog;amazon;steam;steamrip;onlinefix;xbox;linuwu;
