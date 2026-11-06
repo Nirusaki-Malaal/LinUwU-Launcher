@@ -1,3 +1,5 @@
+import XboxGameSettings from '../../../Xbox/GameSettings'
+import XboxContent from '../../../Xbox/Content'
 import './index.scss'
 
 import { useContext, useEffect, useState } from 'react'
@@ -84,6 +86,11 @@ function getStartingTab(platform: string, gameInfo?: GameInfo | null): string {
 }
 
 export default function GamesSettings() {
+  const { gameInfo } = useContext(SettingsContext)
+  return gameInfo?.xboxGameId ? <XboxGameSettings /> : <RegularGamesSettings />
+}
+
+function RegularGamesSettings() {
   const { t } = useTranslation()
   const { platform } = useContext(ContextProvider)
   const { isDefault, gameInfo } = useContext(SettingsContext)
@@ -246,6 +253,7 @@ export default function GamesSettings() {
           <GameMode />
           <NvidiaPrime />
         </SettingsCard>
+        {isDefault && isLinux && <XboxContent section="overlays" />}
         <SettingsCard
           glyph={MonitorCog}
           title={t('settings.section.runtimes', 'Runtimes')}

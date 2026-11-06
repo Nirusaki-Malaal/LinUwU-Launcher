@@ -30,6 +30,38 @@
     -webkit-app-region: drag;
   }
 
+  .Sidebar__brandHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    justify-content: center;
+    width: 100%;
+  }
+
+  .Sidebar__brandMeta {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    overflow: hidden;
+  }
+
+  .Sidebar__brandTitle {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--accent, #66b2ff);
+    line-height: 1.1;
+  }
+
+  .Sidebar__brandTagline {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-secondary, #94a3b8);
+    opacity: 0.85;
+    line-height: 1.2;
+    margin-top: 2px;
+  }
+
   .heroicIcon {
     width: 48px;
     height: 48px;

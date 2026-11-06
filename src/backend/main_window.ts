@@ -55,6 +55,7 @@ export const createMainWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     ...windowProps,
+    title: 'LinUwU Launcher - The last launcher you will need',
     minHeight: 345,
     minWidth: 600,
     show: false,

@@ -93,3 +93,10 @@
     var(--overlay-controls-width) - env(titlebar-area-x, 0px) + 10px
   );
 }
+
+.libraryAddGameActions { display: flex; align-items: center; gap: 6px; }
+.libraryAddGameActions .dropdownContainer .dropdownContent { min-width: 270px; }
+
+.libraryImportButton { height: 44px; width: 44px; min-width: 44px; border-radius: 999px; }
+.LibraryImportMenu { margin-top: 8px; min-width: 290px; border: 1px solid var(--divider); border-radius: 14px !important; }
+.LibraryImportMenu .MuiMenuItem-root { padding: 14px 20px; font-family: var(--primary-font-family); font-size: var(--body-md); }

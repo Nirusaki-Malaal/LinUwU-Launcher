@@ -130,12 +130,16 @@ const router = createHashRouter([
     children: [
       {
         index: true,
-        lazy: makeLazyFunc(import('./screens/Library'))
+        lazy: makeLazyFunc(import('./screens/Library/LibraryRoute'))
       },
       {
         path: 'login',
         lazy: makeLazyFunc(import('./screens/Login'))
       },
+      { path: 'store/xbox', lazy: makeLazyFunc(import('./screens/Xbox')) },
+      { path: 'store/steamrip', lazy: makeLazyFunc(import('./screens/SteamRip')) },
+      { path: 'xbox/account', lazy: makeLazyFunc(import('./screens/Xbox')) },
+      { path: 'xbox/friends', lazy: makeLazyFunc(import('./screens/Xbox')) },
       {
         path: 'store/:store',
         lazy: makeLazyFunc(import('./screens/WebView'))

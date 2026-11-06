@@ -192,6 +192,16 @@ class GlobalState extends PureComponent<Props> {
     return applyGameOverrides(games, overrides)
   }
 
+  loadSideloadLibrary = (
+    overrides: Record<string, GameOverride> = currentOverrides()
+  ): Array<GameInfo> => {
+    const games = sideloadLibrary.get('games', []).map((game) => ({
+      ...game,
+      is_installed: game.is_installed !== undefined ? game.is_installed : true
+    }))
+    return applyGameOverrides(games, overrides)
+  }
+
   state: StateProps = {
     epic: {
       library: this.loadLegendaryLibrary(),
@@ -252,7 +262,7 @@ class GlobalState extends PureComponent<Props> {
       runner: 'legendary',
       gameInfo: null
     },
-    sideloadedLibrary: applyGameOverrides(sideloadLibrary.get('games', [])),
+    sideloadedLibrary: this.loadSideloadLibrary(),
     dialogModalOptions: { showDialog: false },
     externalLinkDialogOptions: { showDialog: false },
     hideChangelogsOnStartup: globalSettings?.hideChangelogsOnStartup || false,
@@ -687,10 +697,7 @@ class GlobalState extends PureComponent<Props> {
         ...this.state.amazon,
         library: this.loadAmazonLibrary(overrides)
       },
-      sideloadedLibrary: applyGameOverrides(
-        sideloadLibrary.get('games', []),
-        overrides
-      )
+      sideloadedLibrary: this.loadSideloadLibrary(overrides)
     })
   }
 
@@ -771,7 +778,7 @@ class GlobalState extends PureComponent<Props> {
       gameUpdates: updates,
       refreshing: false,
       refreshingInTheBackground: true,
-      sideloadedLibrary: applyGameOverrides(updatedSideload, overrides)
+      sideloadedLibrary: this.loadSideloadLibrary(overrides)
     })
 
     if (currentLibraryLength !== epicLibrary.length) {

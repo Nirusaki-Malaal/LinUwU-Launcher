@@ -32,7 +32,9 @@ const useSettingsContext = ({ appName, gameInfo, runner }: Props) => {
     const getSettings = async () => {
       const config = isDefault
         ? await window.api.requestAppSettings()
-        : await window.api.requestGameSettings(appName)
+        : gameInfo?.xboxGameId
+          ? await window.launcher.getHeroicGameSettings(gameInfo.xboxGameId)
+          : await window.api.requestGameSettings(appName)
       setCurrentConfig(config)
     }
     void getSettings()
@@ -46,7 +48,7 @@ const useSettingsContext = ({ appName, gameInfo, runner }: Props) => {
         const noChange = JSON.stringify(value) === JSON.stringify(currentValue)
         if (noChange) return
       }
-      setCurrentConfig({ ...currentConfig, [key]: value })
+      setCurrentConfig((previous) => ({ ...previous, [key]: value }))
       window.api.setSetting({ appName, key, value })
     },
     config: currentConfig,

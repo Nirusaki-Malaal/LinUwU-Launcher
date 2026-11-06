@@ -1,3 +1,4 @@
+import XboxContent from '../Xbox/Content'
 import './index.css'
 
 import React, { useContext, useEffect, useState } from 'react'
@@ -67,6 +68,7 @@ function Settings() {
   const isLogSettings = type === 'log'
   const isAdvancedSetting = type === 'advanced'
   const isSystemInfo = type === 'systeminfo'
+  const isRuntimeSettings = type === 'runtimes'
 
   // TODO: Adding this comment translation here for now to not lose the
   // translation. This should be removed from here when the help is added
@@ -103,17 +105,19 @@ function Settings() {
     return <UpdateComponent />
   }
 
-  const pageTitle = isGeneralSettings
-    ? t('settings.navbar.general', 'General')
-    : isGamesSettings
-      ? t('settings.navbar.games_settings_defaults', 'Game Defaults')
-      : isAdvancedSetting
-        ? t('settings.navbar.advanced', 'Advanced')
-        : isSystemInfo
-          ? t('settings.navbar.systemInformation', 'System Information')
-          : isLogSettings
-            ? t('settings.navbar.log', 'Log')
-            : t('settings.navbar.sync', 'Sync')
+  const pageTitle = isRuntimeSettings
+    ? 'Runtimes'
+    : isGeneralSettings
+      ? t('settings.navbar.general', 'General')
+      : isGamesSettings
+        ? t('settings.navbar.games_settings_defaults', 'Game Defaults')
+        : isAdvancedSetting
+          ? t('settings.navbar.advanced', 'Advanced')
+          : isSystemInfo
+            ? t('settings.navbar.systemInformation', 'System Information')
+            : isLogSettings
+              ? t('settings.navbar.log', 'Log')
+              : t('settings.navbar.sync', 'Sync')
 
   const pageDescription = isGeneralSettings
     ? t('settings.pageSubtitle.general', 'Configure your launcher preferences')
@@ -156,6 +160,9 @@ function Settings() {
             glyph: Gamepad2
           }
         ]),
+    ...(platform === 'linux'
+      ? [{ value: 'runtimes', label: 'Runtimes', glyph: MonitorCog }]
+      : []),
     {
       value: 'advanced',
       label: t('settings.navbar.advanced', 'Advanced'),
@@ -257,10 +264,21 @@ function Settings() {
                 />
               )}
               <div className="settingsPane">
-                {isGeneralSettings && <GeneralSettings />}
+                {isGeneralSettings && (
+                  <>
+                    <GeneralSettings />
+                    {platform === 'linux' && <XboxContent section="storage" />}
+                  </>
+                )}
                 {isGamesSettings && <GamesSettings />}
                 {isSyncSettings && <SyncSaves />}
-                {isAdvancedSetting && <AdvancedSettings />}
+                {isAdvancedSetting && (
+                  <>
+                    <AdvancedSettings />
+                    {platform === 'linux' && <XboxContent section="advanced" />}
+                  </>
+                )}
+                {isRuntimeSettings && <XboxContent section="runtime" />}
                 {isLogSettings && <LogSettings />}
                 {isSystemInfo && <SystemInfo />}
                 <FooterInfo />

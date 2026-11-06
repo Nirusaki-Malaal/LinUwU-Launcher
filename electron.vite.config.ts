@@ -36,7 +36,9 @@ export default defineConfig(({ mode }) => ({
       rollupOptions: {
         input: {
           index: 'src/preload/index.ts',
-          webviewPreload: 'src/webviewPreload/index.ts'
+          webviewPreload: 'src/webviewPreload/index.ts',
+          xbox: 'src/integrations/xbox/preload/index.ts',
+          'xbox-auth': 'src/integrations/xbox/preload/auth.ts'
         },
         output: {
           chunkFileNames: `chunks/[name].js`,
@@ -54,7 +56,11 @@ export default defineConfig(({ mode }) => ({
     root: '.',
     build: {
       rollupOptions: {
-        input: path.resolve('index.html'),
+        input: {
+          main: path.resolve('index.html'),
+          xboxNative: path.resolve('xbox-native.html'),
+          xboxOverlay: path.resolve('overlay.html')
+        },
         output: {
           chunkFileNames: `assets/[name].js`,
           assetFileNames: `assets/[name].[ext]`

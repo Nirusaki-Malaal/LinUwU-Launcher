@@ -1,3 +1,5 @@
+import XboxContent from '../Xbox/Content'
+import { useSearchParams } from 'react-router-dom'
 import './index.scss'
 
 import ContextProvider from 'frontend/state/ContextProvider'
@@ -43,6 +45,10 @@ function formatReleaseDate(date: string, locale: string) {
 
 export default function WineManager(): JSX.Element | null {
   const { t, i18n } = useTranslation()
+  const [query] = useSearchParams()
+  const [xboxSelected, setXboxSelected] = useState(
+    query.get('repository') === 'xbox'
+  )
 
   hasHelp(
     'wineManager',
@@ -259,36 +265,46 @@ export default function WineManager(): JSX.Element | null {
       />
 
       <Tabs
-        items={tabItems}
-        value={repository.value}
-        onChange={handleChangeTab}
+        items={
+          isLinux
+            ? [...tabItems, { value: 'xbox', label: 'Xbox-compatible Wine' }]
+            : tabItems
+        }
+        value={xboxSelected ? 'xbox' : repository.value}
+        onChange={(value) => {
+          setXboxSelected(value === 'xbox')
+          if (value !== 'xbox') handleChangeTab(value)
+        }}
         aria-label={t('wine.manager.title', 'Wine Manager')}
       />
 
-      {wineVersionExplanation && (
+      {xboxSelected && <XboxContent section="wine" />}
+      {!xboxSelected && wineVersionExplanation && (
         <Alert variant="info">{wineVersionExplanation}</Alert>
       )}
 
-      <Panel padding="none" className="WineManager__panel">
-        <Table
-          columns={columns}
-          rows={filteredWineVersions}
-          rowKey={(wineVersion) => wineVersion.version}
-          caption={t('wine.manager.title', 'Wine Manager')}
-          loading={refreshingWineVersions}
-          empty={
-            search
-              ? t(
-                  'wine.manager.no-results',
-                  'No Wine versions match your search.'
-                )
-              : t(
-                  'wine.manager.not-found',
-                  'No Wine versions found. Please click the refresh icon to try again.'
-                )
-          }
-        />
-      </Panel>
+      {!xboxSelected && (
+        <Panel padding="none" className="WineManager__panel">
+          <Table
+            columns={columns}
+            rows={filteredWineVersions}
+            rowKey={(wineVersion) => wineVersion.version}
+            caption={t('wine.manager.title', 'Wine Manager')}
+            loading={refreshingWineVersions}
+            empty={
+              search
+                ? t(
+                    'wine.manager.no-results',
+                    'No Wine versions match your search.'
+                  )
+                : t(
+                    'wine.manager.not-found',
+                    'No Wine versions found. Please click the refresh icon to try again.'
+                  )
+            }
+          />
+        </Panel>
+      )}
 
       {showSettingsModal && (
         <WineManagerSettingsModal onClose={() => setShowSettingsModal(false)} />

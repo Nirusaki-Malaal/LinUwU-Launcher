@@ -1,0 +1,891 @@
+{
+  "name": "SteamRIP",
+  "sourceUrl": "https://hydralinks.cloud/sources/steamrip.json",
+  "lastUpdated": "2024-12-29",
+  "count": 88,
+  "downloads": [
+    {
+      "title": "Black Myth: Wukong",
+      "uris": [
+        "https://buzzheavier.com/f/black-myth-wukong",
+        "https://megadb.net/wukong",
+        "https://1fichier.com/?wukong"
+      ],
+      "fileSize": "118.4 GB",
+      "uploadDate": "2024-08-20",
+      "pageUrl": "https://steamrip.com/?s=Black+Myth:+Wukong"
+    },
+    {
+      "title": "Elden Ring: Shadow of the Erdtree",
+      "uris": [
+        "https://buzzheavier.com/f/elden-ring-erdtree",
+        "https://gofile.io/d/eldenring",
+        "https://1fichier.com/?eldenring"
+      ],
+      "fileSize": "58.2 GB",
+      "uploadDate": "2024-06-21",
+      "pageUrl": "https://steamrip.com/?s=Elden+Ring:+Shadow+of+the+Erdtree"
+    },
+    {
+      "title": "Baldur's Gate 3",
+      "uris": [
+        "https://buzzheavier.com/f/baldurs-gate-3",
+        "https://megadb.net/bg3",
+        "https://1fichier.com/?bg3"
+      ],
+      "fileSize": "122.5 GB",
+      "uploadDate": "2023-08-03",
+      "pageUrl": "https://steamrip.com/?s=Baldur's+Gate+3"
+    },
+    {
+      "title": "Cyberpunk 2077: Phantom Liberty",
+      "uris": [
+        "https://buzzheavier.com/f/cyberpunk-phantom-liberty",
+        "https://gofile.io/d/cp2077"
+      ],
+      "fileSize": "70.1 GB",
+      "uploadDate": "2023-09-26",
+      "pageUrl": "https://steamrip.com/?s=Cyberpunk+2077:+Phantom+Liberty"
+    },
+    {
+      "title": "God of War Ragnarok",
+      "uris": [
+        "https://buzzheavier.com/f/gow-ragnarok",
+        "https://megadb.net/gowr"
+      ],
+      "fileSize": "84.3 GB",
+      "uploadDate": "2024-09-19",
+      "pageUrl": "https://steamrip.com/?s=God+of+War+Ragnarok"
+    },
+    {
+      "title": "Ghost of Tsushima Director's Cut",
+      "uris": [
+        "https://buzzheavier.com/f/ghost-of-tsushima",
+        "https://1fichier.com/?got"
+      ],
+      "fileSize": "52.8 GB",
+      "uploadDate": "2024-05-16",
+      "pageUrl": "https://steamrip.com/?s=Ghost+of+Tsushima+Director's+Cut"
+    },
+    {
+      "title": "Red Dead Redemption 2",
+      "uris": [
+        "https://buzzheavier.com/f/rdr2",
+        "https://megadb.net/rdr2"
+      ],
+      "fileSize": "119.2 GB",
+      "uploadDate": "2019-11-05",
+      "pageUrl": "https://steamrip.com/?s=Red+Dead+Redemption+2"
+    },
+    {
+      "title": "Grand Theft Auto V",
+      "uris": [
+        "https://buzzheavier.com/f/gta-v",
+        "https://1fichier.com/?gtav"
+      ],
+      "fileSize": "95.6 GB",
+      "uploadDate": "2015-04-14",
+      "pageUrl": "https://steamrip.com/?s=Grand+Theft+Auto+V"
+    },
+    {
+      "title": "Forza Horizon 5 Premium Edition",
+      "uris": [
+        "https://buzzheavier.com/f/forza-horizon-5",
+        "https://megadb.net/fh5"
+      ],
+      "fileSize": "135.0 GB",
+      "uploadDate": "2021-11-09",
+      "pageUrl": "https://steamrip.com/?s=Forza+Horizon+5+Premium+Edition"
+    },
+    {
+      "title": "Hades II",
+      "uris": [
+        "https://buzzheavier.com/f/hades-2",
+        "https://gofile.io/d/hades2"
+      ],
+      "fileSize": "4.2 GB",
+      "uploadDate": "2024-05-06",
+      "pageUrl": "https://steamrip.com/?s=Hades+II"
+    },
+    {
+      "title": "Hades",
+      "uris": [
+        "https://buzzheavier.com/f/hades-1",
+        "https://1fichier.com/?hades"
+      ],
+      "fileSize": "11.0 GB",
+      "uploadDate": "2020-09-17",
+      "pageUrl": "https://steamrip.com/?s=Hades"
+    },
+    {
+      "title": "Hollow Knight: Voidheart Edition",
+      "uris": [
+        "https://buzzheavier.com/f/hollow-knight",
+        "https://gofile.io/d/hk"
+      ],
+      "fileSize": "1.6 GB",
+      "uploadDate": "2017-02-24",
+      "pageUrl": "https://steamrip.com/?s=Hollow+Knight:+Voidheart+Edition"
+    },
+    {
+      "title": "Palworld",
+      "uris": [
+        "https://buzzheavier.com/f/palworld",
+        "https://megadb.net/palworld"
+      ],
+      "fileSize": "16.8 GB",
+      "uploadDate": "2024-01-19",
+      "pageUrl": "https://steamrip.com/?s=Palworld"
+    },
+    {
+      "title": "Manor Lords",
+      "uris": [
+        "https://buzzheavier.com/f/manor-lords",
+        "https://buzzheavier.com/f/manor-lords-mirror"
+      ],
+      "fileSize": "12.4 GB",
+      "uploadDate": "2024-04-26",
+      "pageUrl": "https://steamrip.com/?s=Manor+Lords"
+    },
+    {
+      "title": "Helldivers 2",
+      "uris": [
+        "https://buzzheavier.com/f/helldivers-2",
+        "https://1fichier.com/?hd2"
+      ],
+      "fileSize": "24.5 GB",
+      "uploadDate": "2024-02-08",
+      "pageUrl": "https://steamrip.com/?s=Helldivers+2"
+    },
+    {
+      "title": "Lies of P",
+      "uris": [
+        "https://buzzheavier.com/f/lies-of-p",
+        "https://megadb.net/liesofp"
+      ],
+      "fileSize": "34.7 GB",
+      "uploadDate": "2023-09-19",
+      "pageUrl": "https://steamrip.com/?s=Lies+of+P"
+    },
+    {
+      "title": "Sekiro: Shadows Die Twice",
+      "uris": [
+        "https://buzzheavier.com/f/sekiro",
+        "https://1fichier.com/?sekiro"
+      ],
+      "fileSize": "14.5 GB",
+      "uploadDate": "2019-03-22",
+      "pageUrl": "https://steamrip.com/?s=Sekiro:+Shadows+Die+Twice"
+    },
+    {
+      "title": "Dark Souls III Deluxe Edition",
+      "uris": [
+        "https://buzzheavier.com/f/dark-souls-3",
+        "https://gofile.io/d/ds3"
+      ],
+      "fileSize": "25.0 GB",
+      "uploadDate": "2016-04-11",
+      "pageUrl": "https://steamrip.com/?s=Dark+Souls+III+Deluxe+Edition"
+    },
+    {
+      "title": "Dark Souls Remastered",
+      "uris": [
+        "https://buzzheavier.com/f/dark-souls-remastered",
+        "https://1fichier.com/?dsr"
+      ],
+      "fileSize": "7.1 GB",
+      "uploadDate": "2018-05-24",
+      "pageUrl": "https://steamrip.com/?s=Dark+Souls+Remastered"
+    },
+    {
+      "title": "The Witcher 3: Wild Hunt Complete Edition",
+      "uris": [
+        "https://buzzheavier.com/f/witcher-3-complete",
+        "https://megadb.net/tw3"
+      ],
+      "fileSize": "52.0 GB",
+      "uploadDate": "2015-05-18",
+      "pageUrl": "https://steamrip.com/?s=The+Witcher+3:+Wild+Hunt+Complete+Edition"
+    },
+    {
+      "title": "Monster Hunter: World",
+      "uris": [
+        "https://buzzheavier.com/f/mhw",
+        "https://1fichier.com/?mhw"
+      ],
+      "fileSize": "48.2 GB",
+      "uploadDate": "2018-08-09",
+      "pageUrl": "https://steamrip.com/?s=Monster+Hunter:+World"
+    },
+    {
+      "title": "Monster Hunter Rise: Sunbreak",
+      "uris": [
+        "https://buzzheavier.com/f/mhr-sunbreak",
+        "https://gofile.io/d/mhr"
+      ],
+      "fileSize": "32.1 GB",
+      "uploadDate": "2022-01-12",
+      "pageUrl": "https://steamrip.com/?s=Monster+Hunter+Rise:+Sunbreak"
+    },
+    {
+      "title": "Armored Core VI: Fires of Rubicon",
+      "uris": [
+        "https://buzzheavier.com/f/ac6",
+        "https://1fichier.com/?ac6"
+      ],
+      "fileSize": "58.6 GB",
+      "uploadDate": "2023-08-25",
+      "pageUrl": "https://steamrip.com/?s=Armored+Core+VI:+Fires+of+Rubicon"
+    },
+    {
+      "title": "Resident Evil 4 Remake",
+      "uris": [
+        "https://buzzheavier.com/f/re4-remake",
+        "https://megadb.net/re4r"
+      ],
+      "fileSize": "56.4 GB",
+      "uploadDate": "2023-03-24",
+      "pageUrl": "https://steamrip.com/?s=Resident+Evil+4+Remake"
+    },
+    {
+      "title": "Resident Evil Village Gold Edition",
+      "uris": [
+        "https://buzzheavier.com/f/re-village",
+        "https://1fichier.com/?rev"
+      ],
+      "fileSize": "28.3 GB",
+      "uploadDate": "2021-05-07",
+      "pageUrl": "https://steamrip.com/?s=Resident+Evil+Village+Gold+Edition"
+    },
+    {
+      "title": "Silent Hill 2 Remake",
+      "uris": [
+        "https://buzzheavier.com/f/silent-hill-2-remake",
+        "https://gofile.io/d/sh2"
+      ],
+      "fileSize": "49.0 GB",
+      "uploadDate": "2024-10-08",
+      "pageUrl": "https://steamrip.com/?s=Silent+Hill+2+Remake"
+    },
+    {
+      "title": "Metaphor: ReFantazio",
+      "uris": [
+        "https://buzzheavier.com/f/metaphor-refantazio",
+        "https://megadb.net/metaphor"
+      ],
+      "fileSize": "86.0 GB",
+      "uploadDate": "2024-10-11",
+      "pageUrl": "https://steamrip.com/?s=Metaphor:+ReFantazio"
+    },
+    {
+      "title": "Persona 3 Reload",
+      "uris": [
+        "https://buzzheavier.com/f/p3r",
+        "https://1fichier.com/?p3r"
+      ],
+      "fileSize": "22.5 GB",
+      "uploadDate": "2024-02-02",
+      "pageUrl": "https://steamrip.com/?s=Persona+3+Reload"
+    },
+    {
+      "title": "Persona 5 Royal",
+      "uris": [
+        "https://buzzheavier.com/f/p5r",
+        "https://megadb.net/p5r"
+      ],
+      "fileSize": "41.2 GB",
+      "uploadDate": "2022-10-21",
+      "pageUrl": "https://steamrip.com/?s=Persona+5+Royal"
+    },
+    {
+      "title": "Stardew Valley v1.6.8",
+      "uris": [
+        "https://buzzheavier.com/f/stardew-valley",
+        "https://gofile.io/d/sv"
+      ],
+      "fileSize": "680 MB",
+      "uploadDate": "2024-04-20",
+      "pageUrl": "https://steamrip.com/?s=Stardew+Valley+v1.6.8"
+    },
+    {
+      "title": "Terraria v1.4.4.9",
+      "uris": [
+        "https://buzzheavier.com/f/terraria",
+        "https://1fichier.com/?terraria"
+      ],
+      "fileSize": "550 MB",
+      "uploadDate": "2023-09-01",
+      "pageUrl": "https://steamrip.com/?s=Terraria+v1.4.4.9"
+    },
+    {
+      "title": "RimWorld: Anomaly",
+      "uris": [
+        "https://buzzheavier.com/f/rimworld-anomaly",
+        "https://megadb.net/rw"
+      ],
+      "fileSize": "380 MB",
+      "uploadDate": "2024-04-11",
+      "pageUrl": "https://steamrip.com/?s=RimWorld:+Anomaly"
+    },
+    {
+      "title": "Factorio: Space Age",
+      "uris": [
+        "https://buzzheavier.com/f/factorio-space-age",
+        "https://gofile.io/d/factorio"
+      ],
+      "fileSize": "2.1 GB",
+      "uploadDate": "2024-10-21",
+      "pageUrl": "https://steamrip.com/?s=Factorio:+Space+Age"
+    },
+    {
+      "title": "Satisfactory v1.0",
+      "uris": [
+        "https://buzzheavier.com/f/satisfactory-v1",
+        "https://1fichier.com/?satisfactory"
+      ],
+      "fileSize": "18.5 GB",
+      "uploadDate": "2024-09-10",
+      "pageUrl": "https://steamrip.com/?s=Satisfactory+v1.0"
+    },
+    {
+      "title": "Subnautica",
+      "uris": [
+        "https://buzzheavier.com/f/subnautica",
+        "https://megadb.net/subnautica"
+      ],
+      "fileSize": "6.2 GB",
+      "uploadDate": "2018-01-23",
+      "pageUrl": "https://steamrip.com/?s=Subnautica"
+    },
+    {
+      "title": "Subnautica: Below Zero",
+      "uris": [
+        "https://buzzheavier.com/f/subnautica-bz",
+        "https://1fichier.com/?subnauticabz"
+      ],
+      "fileSize": "7.8 GB",
+      "uploadDate": "2021-05-14",
+      "pageUrl": "https://steamrip.com/?s=Subnautica:+Below+Zero"
+    },
+    {
+      "title": "Slay the Spire",
+      "uris": [
+        "https://buzzheavier.com/f/slay-the-spire",
+        "https://gofile.io/d/sts"
+      ],
+      "fileSize": "920 MB",
+      "uploadDate": "2019-01-23",
+      "pageUrl": "https://steamrip.com/?s=Slay+the+Spire"
+    },
+    {
+      "title": "Balatro",
+      "uris": [
+        "https://buzzheavier.com/f/balatro",
+        "https://megadb.net/balatro"
+      ],
+      "fileSize": "110 MB",
+      "uploadDate": "2024-02-20",
+      "pageUrl": "https://steamrip.com/?s=Balatro"
+    },
+    {
+      "title": "No Man's Sky: Worlds",
+      "uris": [
+        "https://buzzheavier.com/f/nms-worlds",
+        "https://1fichier.com/?nms"
+      ],
+      "fileSize": "15.8 GB",
+      "uploadDate": "2024-07-17",
+      "pageUrl": "https://steamrip.com/?s=No+Man's+Sky:+Worlds"
+    },
+    {
+      "title": "Deep Rock Galactic",
+      "uris": [
+        "https://buzzheavier.com/f/drg",
+        "https://gofile.io/d/drg"
+      ],
+      "fileSize": "3.4 GB",
+      "uploadDate": "2020-05-13",
+      "pageUrl": "https://steamrip.com/?s=Deep+Rock+Galactic"
+    },
+    {
+      "title": "Sea of Thieves 2024 Edition",
+      "uris": [
+        "https://buzzheavier.com/f/sot",
+        "https://megadb.net/sot"
+      ],
+      "fileSize": "88.2 GB",
+      "uploadDate": "2020-06-03",
+      "pageUrl": "https://steamrip.com/?s=Sea+of+Thieves+2024+Edition"
+    },
+    {
+      "title": "Dying Light 2: Stay Human",
+      "uris": [
+        "https://buzzheavier.com/f/dying-light-2",
+        "https://1fichier.com/?dl2"
+      ],
+      "fileSize": "45.0 GB",
+      "uploadDate": "2022-02-04",
+      "pageUrl": "https://steamrip.com/?s=Dying+Light+2:+Stay+Human"
+    },
+    {
+      "title": "Dead Space Remake",
+      "uris": [
+        "https://buzzheavier.com/f/dead-space-remake",
+        "https://megadb.net/dsr"
+      ],
+      "fileSize": "35.2 GB",
+      "uploadDate": "2023-01-27",
+      "pageUrl": "https://steamrip.com/?s=Dead+Space+Remake"
+    },
+    {
+      "title": "Dragon's Dogma 2",
+      "uris": [
+        "https://buzzheavier.com/f/dragons-dogma-2",
+        "https://gofile.io/d/dd2"
+      ],
+      "fileSize": "64.5 GB",
+      "uploadDate": "2024-03-22",
+      "pageUrl": "https://steamrip.com/?s=Dragon's+Dogma+2"
+    },
+    {
+      "title": "Kingdom Come: Deliverance Royal Edition",
+      "uris": [
+        "https://buzzheavier.com/f/kcd",
+        "https://1fichier.com/?kcd"
+      ],
+      "fileSize": "62.0 GB",
+      "uploadDate": "2018-02-13",
+      "pageUrl": "https://steamrip.com/?s=Kingdom+Come:+Deliverance+Royal+Edition"
+    },
+    {
+      "title": "S.T.A.L.K.E.R. 2: Heart of Chornobyl",
+      "uris": [
+        "https://buzzheavier.com/f/stalker-2",
+        "https://megadb.net/stalker2"
+      ],
+      "fileSize": "142.0 GB",
+      "uploadDate": "2024-11-20",
+      "pageUrl": "https://steamrip.com/?s=S.T.A.L.K.E.R.+2:+Heart+of+Chornobyl"
+    },
+    {
+      "title": "Frostpunk 2",
+      "uris": [
+        "https://buzzheavier.com/f/frostpunk-2",
+        "https://gofile.io/d/fp2"
+      ],
+      "fileSize": "11.5 GB",
+      "uploadDate": "2024-09-20",
+      "pageUrl": "https://steamrip.com/?s=Frostpunk+2"
+    },
+    {
+      "title": "Age of Mythology: Retold",
+      "uris": [
+        "https://buzzheavier.com/f/aom-retold",
+        "https://1fichier.com/?aomr"
+      ],
+      "fileSize": "24.0 GB",
+      "uploadDate": "2024-09-04",
+      "pageUrl": "https://steamrip.com/?s=Age+of+Mythology:+Retold"
+    },
+    {
+      "title": "Civilization VI Anthology",
+      "uris": [
+        "https://buzzheavier.com/f/civ-6",
+        "https://megadb.net/civ6"
+      ],
+      "fileSize": "19.5 GB",
+      "uploadDate": "2016-10-21",
+      "pageUrl": "https://steamrip.com/?s=Civilization+VI+Anthology"
+    },
+    {
+      "title": "Crusader Kings III",
+      "uris": [
+        "https://buzzheavier.com/f/ck3",
+        "https://gofile.io/d/ck3"
+      ],
+      "fileSize": "8.2 GB",
+      "uploadDate": "2020-09-01",
+      "pageUrl": "https://steamrip.com/?s=Crusader+Kings+III"
+    },
+    {
+      "title": "Hearts of Iron IV",
+      "uris": [
+        "https://buzzheavier.com/f/hoi4",
+        "https://1fichier.com/?hoi4"
+      ],
+      "fileSize": "4.6 GB",
+      "uploadDate": "2016-06-06",
+      "pageUrl": "https://steamrip.com/?s=Hearts+of+Iron+IV"
+    },
+    {
+      "title": "Project Zomboid",
+      "uris": [
+        "https://buzzheavier.com/f/project-zomboid",
+        "https://gofile.io/d/pz"
+      ],
+      "fileSize": "3.2 GB",
+      "uploadDate": "2013-11-08",
+      "pageUrl": "https://steamrip.com/?s=Project+Zomboid"
+    },
+    {
+      "title": "The Forest",
+      "uris": [
+        "https://buzzheavier.com/f/the-forest",
+        "https://1fichier.com/?theforest"
+      ],
+      "fileSize": "4.5 GB",
+      "uploadDate": "2018-04-30",
+      "pageUrl": "https://steamrip.com/?s=The+Forest"
+    },
+    {
+      "title": "Sons of the Forest",
+      "uris": [
+        "https://buzzheavier.com/f/sons-of-the-forest",
+        "https://megadb.net/sotf"
+      ],
+      "fileSize": "16.0 GB",
+      "uploadDate": "2024-02-22",
+      "pageUrl": "https://steamrip.com/?s=Sons+of+the+Forest"
+    },
+    {
+      "title": "Phasmophobia",
+      "uris": [
+        "https://buzzheavier.com/f/phasmophobia",
+        "https://gofile.io/d/phasmo"
+      ],
+      "fileSize": "14.0 GB",
+      "uploadDate": "2020-09-18",
+      "pageUrl": "https://steamrip.com/?s=Phasmophobia"
+    },
+    {
+      "title": "Lethal Company v56",
+      "uris": [
+        "https://buzzheavier.com/f/lethal-company",
+        "https://1fichier.com/?lethal"
+      ],
+      "fileSize": "890 MB",
+      "uploadDate": "2023-10-23",
+      "pageUrl": "https://steamrip.com/?s=Lethal+Company+v56"
+    },
+    {
+      "title": "Content Warning",
+      "uris": [
+        "https://buzzheavier.com/f/content-warning",
+        "https://megadb.net/cw"
+      ],
+      "fileSize": "1.2 GB",
+      "uploadDate": "2024-04-01",
+      "pageUrl": "https://steamrip.com/?s=Content+Warning"
+    },
+    {
+      "title": "Valheim",
+      "uris": [
+        "https://buzzheavier.com/f/valheim",
+        "https://gofile.io/d/valheim"
+      ],
+      "fileSize": "1.5 GB",
+      "uploadDate": "2021-02-02",
+      "pageUrl": "https://steamrip.com/?s=Valheim"
+    },
+    {
+      "title": "Rust",
+      "uris": [
+        "https://buzzheavier.com/f/rust",
+        "https://1fichier.com/?rust"
+      ],
+      "fileSize": "22.0 GB",
+      "uploadDate": "2018-02-08",
+      "pageUrl": "https://steamrip.com/?s=Rust"
+    },
+    {
+      "title": "BeamNG.drive v0.33",
+      "uris": [
+        "https://buzzheavier.com/f/beamng-drive",
+        "https://megadb.net/beamng"
+      ],
+      "fileSize": "42.5 GB",
+      "uploadDate": "2015-05-29",
+      "pageUrl": "https://steamrip.com/?s=BeamNG.drive+v0.33"
+    },
+    {
+      "title": "Assetto Corsa Ultimate Edition",
+      "uris": [
+        "https://buzzheavier.com/f/assetto-corsa",
+        "https://gofile.io/d/ac"
+      ],
+      "fileSize": "38.0 GB",
+      "uploadDate": "2014-12-19",
+      "pageUrl": "https://steamrip.com/?s=Assetto+Corsa+Ultimate+Edition"
+    },
+    {
+      "title": "Euro Truck Simulator 2",
+      "uris": [
+        "https://buzzheavier.com/f/ets2",
+        "https://1fichier.com/?ets2"
+      ],
+      "fileSize": "18.2 GB",
+      "uploadDate": "2012-10-18",
+      "pageUrl": "https://steamrip.com/?s=Euro+Truck+Simulator+2"
+    },
+    {
+      "title": "SnowRunner Premium Edition",
+      "uris": [
+        "https://buzzheavier.com/f/snowrunner",
+        "https://megadb.net/snowrunner"
+      ],
+      "fileSize": "32.0 GB",
+      "uploadDate": "2021-05-18",
+      "pageUrl": "https://steamrip.com/?s=SnowRunner+Premium+Edition"
+    },
+    {
+      "title": "Warhammer 40,000: Space Marine 2",
+      "uris": [
+        "https://buzzheavier.com/f/space-marine-2",
+        "https://gofile.io/d/sm2"
+      ],
+      "fileSize": "68.0 GB",
+      "uploadDate": "2024-09-09",
+      "pageUrl": "https://steamrip.com/?s=Warhammer+40,000:+Space+Marine+2"
+    },
+    {
+      "title": "God of War (2018)",
+      "uris": [
+        "https://buzzheavier.com/f/god-of-war-2018",
+        "https://1fichier.com/?gow2018"
+      ],
+      "fileSize": "36.8 GB",
+      "uploadDate": "2022-01-14",
+      "pageUrl": "https://steamrip.com/?s=God+of+War+(2018)"
+    },
+    {
+      "title": "Marvel's Spider-Man Remastered",
+      "uris": [
+        "https://buzzheavier.com/f/spiderman-remastered",
+        "https://megadb.net/spiderman"
+      ],
+      "fileSize": "65.2 GB",
+      "uploadDate": "2022-08-12",
+      "pageUrl": "https://steamrip.com/?s=Marvel's+Spider-Man+Remastered"
+    },
+    {
+      "title": "Marvel's Spider-Man: Miles Morales",
+      "uris": [
+        "https://buzzheavier.com/f/spiderman-miles-morales",
+        "https://1fichier.com/?miles"
+      ],
+      "fileSize": "38.0 GB",
+      "uploadDate": "2022-11-18",
+      "pageUrl": "https://steamrip.com/?s=Marvel's+Spider-Man:+Miles+Morales"
+    },
+    {
+      "title": "Horizon Zero Dawn Complete Edition",
+      "uris": [
+        "https://buzzheavier.com/f/horizon-zero-dawn",
+        "https://gofile.io/d/hzd"
+      ],
+      "fileSize": "67.0 GB",
+      "uploadDate": "2020-08-07",
+      "pageUrl": "https://steamrip.com/?s=Horizon+Zero+Dawn+Complete+Edition"
+    },
+    {
+      "title": "Horizon Forbidden West Complete Edition",
+      "uris": [
+        "https://buzzheavier.com/f/horizon-forbidden-west",
+        "https://megadb.net/hfw"
+      ],
+      "fileSize": "121.0 GB",
+      "uploadDate": "2024-03-21",
+      "pageUrl": "https://steamrip.com/?s=Horizon+Forbidden+West+Complete+Edition"
+    },
+    {
+      "title": "The Last of Us Part I",
+      "uris": [
+        "https://buzzheavier.com/f/the-last-of-us-part-1",
+        "https://1fichier.com/?tlou1"
+      ],
+      "fileSize": "74.0 GB",
+      "uploadDate": "2023-03-28",
+      "pageUrl": "https://steamrip.com/?s=The+Last+of+Us+Part+I"
+    },
+    {
+      "title": "Uncharted: Legacy of Thieves Collection",
+      "uris": [
+        "https://buzzheavier.com/f/uncharted-lotc",
+        "https://megadb.net/uncharted"
+      ],
+      "fileSize": "126.0 GB",
+      "uploadDate": "2022-10-19",
+      "pageUrl": "https://steamrip.com/?s=Uncharted:+Legacy+of+Thieves+Collection"
+    },
+    {
+      "title": "Returnal",
+      "uris": [
+        "https://buzzheavier.com/f/returnal",
+        "https://1fichier.com/?returnal"
+      ],
+      "fileSize": "56.0 GB",
+      "uploadDate": "2023-02-15",
+      "pageUrl": "https://steamrip.com/?s=Returnal"
+    },
+    {
+      "title": "Ratchet & Clank: Rift Apart",
+      "uris": [
+        "https://buzzheavier.com/f/ratchet-and-clank",
+        "https://gofile.io/d/rcra"
+      ],
+      "fileSize": "34.5 GB",
+      "uploadDate": "2023-07-26",
+      "pageUrl": "https://steamrip.com/?s=Ratchet+&+Clank:+Rift+Apart"
+    },
+    {
+      "title": "Ghostrunner 2",
+      "uris": [
+        "https://buzzheavier.com/f/ghostrunner-2",
+        "https://megadb.net/gr2"
+      ],
+      "fileSize": "42.0 GB",
+      "uploadDate": "2023-10-26",
+      "pageUrl": "https://steamrip.com/?s=Ghostrunner+2"
+    },
+    {
+      "title": "Atomic Heart",
+      "uris": [
+        "https://buzzheavier.com/f/atomic-heart",
+        "https://1fichier.com/?atomicheart"
+      ],
+      "fileSize": "78.0 GB",
+      "uploadDate": "2023-02-21",
+      "pageUrl": "https://steamrip.com/?s=Atomic+Heart"
+    },
+    {
+      "title": "Control Ultimate Edition",
+      "uris": [
+        "https://buzzheavier.com/f/control-ultimate",
+        "https://gofile.io/d/control"
+      ],
+      "fileSize": "42.0 GB",
+      "uploadDate": "2020-08-27",
+      "pageUrl": "https://steamrip.com/?s=Control+Ultimate+Edition"
+    },
+    {
+      "title": "Alan Wake 2",
+      "uris": [
+        "https://buzzheavier.com/f/alan-wake-2",
+        "https://megadb.net/aw2"
+      ],
+      "fileSize": "86.0 GB",
+      "uploadDate": "2023-10-27",
+      "pageUrl": "https://steamrip.com/?s=Alan+Wake+2"
+    },
+    {
+      "title": "Detroit: Become Human",
+      "uris": [
+        "https://buzzheavier.com/f/detroit-become-human",
+        "https://1fichier.com/?detroit"
+      ],
+      "fileSize": "54.0 GB",
+      "uploadDate": "2020-06-18",
+      "pageUrl": "https://steamrip.com/?s=Detroit:+Become+Human"
+    },
+    {
+      "title": "Death Stranding Director's Cut",
+      "uris": [
+        "https://buzzheavier.com/f/death-stranding-dc",
+        "https://megadb.net/dsdc"
+      ],
+      "fileSize": "76.0 GB",
+      "uploadDate": "2022-03-30",
+      "pageUrl": "https://steamrip.com/?s=Death+Stranding+Director's+Cut"
+    },
+    {
+      "title": "Days Gone",
+      "uris": [
+        "https://buzzheavier.com/f/days-gone",
+        "https://1fichier.com/?daysgone"
+      ],
+      "fileSize": "59.0 GB",
+      "uploadDate": "2021-05-18",
+      "pageUrl": "https://steamrip.com/?s=Days+Gone"
+    },
+    {
+      "title": "DOOM Eternal Deluxe Edition",
+      "uris": [
+        "https://buzzheavier.com/f/doom-eternal",
+        "https://gofile.io/d/doometernal"
+      ],
+      "fileSize": "78.0 GB",
+      "uploadDate": "2020-03-20",
+      "pageUrl": "https://steamrip.com/?s=DOOM+Eternal+Deluxe+Edition"
+    },
+    {
+      "title": "Wolfenstein II: The New Colossus",
+      "uris": [
+        "https://buzzheavier.com/f/wolfenstein-2",
+        "https://1fichier.com/?wolf2"
+      ],
+      "fileSize": "48.0 GB",
+      "uploadDate": "2017-10-27",
+      "pageUrl": "https://steamrip.com/?s=Wolfenstein+II:+The+New+Colossus"
+    },
+    {
+      "title": "Dishonored 2",
+      "uris": [
+        "https://buzzheavier.com/f/dishonored-2",
+        "https://megadb.net/dishonored2"
+      ],
+      "fileSize": "38.0 GB",
+      "uploadDate": "2016-11-11",
+      "pageUrl": "https://steamrip.com/?s=Dishonored+2"
+    },
+    {
+      "title": "Prey Digital Deluxe Edition",
+      "uris": [
+        "https://buzzheavier.com/f/prey",
+        "https://gofile.io/d/prey"
+      ],
+      "fileSize": "32.0 GB",
+      "uploadDate": "2017-05-05",
+      "pageUrl": "https://steamrip.com/?s=Prey+Digital+Deluxe+Edition"
+    },
+    {
+      "title": "Fallout 4 Game of the Year Edition",
+      "uris": [
+        "https://buzzheavier.com/f/fallout-4-goty",
+        "https://1fichier.com/?fo4"
+      ],
+      "fileSize": "36.0 GB",
+      "uploadDate": "2015-11-10",
+      "pageUrl": "https://steamrip.com/?s=Fallout+4+Game+of+the+Year+Edition"
+    },
+    {
+      "title": "The Elder Scrolls V: Skyrim Special Edition",
+      "uris": [
+        "https://buzzheavier.com/f/skyrim-se",
+        "https://megadb.net/skyrimse"
+      ],
+      "fileSize": "14.5 GB",
+      "uploadDate": "2016-10-28",
+      "pageUrl": "https://steamrip.com/?s=The+Elder+Scrolls+V:+Skyrim+Special+Edition"
+    },
+    {
+      "title": "Starfield",
+      "uris": [
+        "https://buzzheavier.com/f/starfield",
+        "https://gofile.io/d/starfield"
+      ],
+      "fileSize": "116.0 GB",
+      "uploadDate": "2023-09-06",
+      "pageUrl": "https://steamrip.com/?s=Starfield"
+    },
+    {
+      "title": "Aviassembly",
+      "uris": [
+        "https://buzzheavier.com/f/aviassembly",
+        "https://megadb.net/aviassembly"
+      ],
+      "fileSize": "1.4 GB",
+      "uploadDate": "2025-04-15",
+      "pageUrl": "https://steamrip.com/?s=Aviassembly"
+    }
+  ]
+}

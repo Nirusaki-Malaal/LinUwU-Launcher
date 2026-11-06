@@ -19,7 +19,7 @@ import {
 } from 'lucide-react'
 import './index.css'
 
-type StoreKey = 'legendary' | 'gog' | 'nile' | 'zoom' | 'sideload'
+type StoreKey = 'legendary' | 'gog' | 'nile' | 'zoom' | 'sideload' | 'xbox'
 
 export default function LibraryFilters() {
   const { t } = useTranslation()
@@ -46,7 +46,10 @@ export default function LibraryFilters() {
   } = useContext(LibraryContext)
 
   const toggleStore = (store: StoreKey) => {
-    setStoresFilters({ ...storesFilters, [store]: !storesFilters[store] })
+    setStoresFilters({
+      ...storesFilters,
+      [store]: !storesFilters[store]
+    })
   }
 
   const togglePlatform = (plat: keyof PlatformsFilters) => {
@@ -58,6 +61,7 @@ export default function LibraryFilters() {
 
   const resetFilters = () => {
     setStoresFilters({
+      xbox: true,
       legendary: true,
       gog: true,
       nile: true,
@@ -81,6 +85,12 @@ export default function LibraryFilters() {
     show: boolean
   }
   const stores: StoreDef[] = [
+    {
+      key: 'xbox',
+      label: 'Xbox / Microsoft Store',
+      runner: 'sideload',
+      show: platform === 'linux'
+    },
     {
       key: 'legendary',
       label: 'Epic Games',

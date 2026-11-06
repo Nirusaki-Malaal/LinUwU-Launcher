@@ -1,3 +1,9 @@
+import useGlobalState from 'frontend/state/GlobalStateV2'
+import { useXboxSnapshot } from '../Xbox/Content'
+import {
+  projectXboxGame,
+  openXboxGameDetails
+} from '../Xbox/library-projection'
 import './index.css'
 
 import React, {
@@ -49,6 +55,16 @@ type SearchableGame = {
 
 export default React.memo(function Library(): JSX.Element {
   const { t } = useTranslation()
+  const { data: xbox } = useXboxSnapshot()
+  const { gameOverrides } = useGlobalState.keys('gameOverrides')
+  const xboxGames = useMemo(
+    () =>
+      (xbox?.games || []).map((game) => {
+        const info = projectXboxGame(game)
+        return { ...info, overrides: gameOverrides[info.app_name] }
+      }),
+    [xbox?.games, gameOverrides]
+  )
 
   const {
     libraryStatus,
@@ -80,11 +96,48 @@ export default React.memo(function Library(): JSX.Element {
     setLayout(layout)
   }
 
-  let initialStoresfilters
+  let initialStoresfilters: StoresFilters
   const storesFiltersString = storage.getItem('storesFilters')
   if (storesFiltersString) {
-    // If we have something stored, use that
-    initialStoresfilters = JSON.parse(storesFiltersString) as StoresFilters
+    try {
+      const parsed = JSON.parse(storesFiltersString) as StoresFilters
+      const hasAnyStore =
+        (parsed.legendary && Boolean(epic.username)) ||
+        (parsed.gog && Boolean(gog.username)) ||
+        (parsed.nile && Boolean(amazon.username || amazon.user_id)) ||
+        Boolean(parsed.sideload) ||
+        Boolean(parsed.xbox)
+
+      if (!hasAnyStore) {
+        initialStoresfilters = {
+          legendary: true,
+          gog: true,
+          nile: true,
+          sideload: true,
+          xbox: true,
+          zoom: zoom.enabled
+        }
+        storage.setItem('storesFilters', JSON.stringify(initialStoresfilters))
+      } else {
+        initialStoresfilters = {
+          legendary: parsed.legendary ?? true,
+          gog: parsed.gog ?? true,
+          nile: parsed.nile ?? true,
+          sideload: parsed.sideload ?? true,
+          xbox: parsed.xbox ?? true,
+          zoom: parsed.zoom ?? false
+        }
+      }
+    } catch {
+      initialStoresfilters = {
+        legendary: true,
+        gog: true,
+        nile: true,
+        sideload: true,
+        xbox: true,
+        zoom: zoom.enabled
+      }
+    }
   } else {
     // Else, use the old `category` filter
     // TODO: we can remove this eventually after a few releases and just use the code of the if
@@ -94,6 +147,7 @@ export default React.memo(function Library(): JSX.Element {
       gog: gogCategories.includes(storedCategory),
       nile: amazonCategories.includes(storedCategory),
       sideload: sideloadedCategories.includes(storedCategory),
+      xbox: true,
       zoom: zoom.enabled && zoomCategories.includes(storedCategory)
     }
   }
@@ -271,6 +325,10 @@ export default React.memo(function Library(): JSX.Element {
     runner: Runner,
     gameInfo: GameInfo | null
   ) {
+    if (gameInfo?.xboxGameId) {
+      openXboxGameDetails(gameInfo.xboxGameId)
+      return
+    }
     openInstallGameModal({ appName, runner, gameInfo })
   }
 
@@ -376,6 +434,14 @@ export default React.memo(function Library(): JSX.Element {
         if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
       })
     }
+    xboxGames.forEach((game) => {
+      if (
+        favouriteGamesList.some(
+          (favourite) => favourite.appName === game.app_name
+        )
+      )
+        tempArray.push(game)
+    })
     return tempArray.sort((a, b) => {
       const gameA = a.title.toUpperCase().replace('THE ', '')
       const gameB = b.title.toUpperCase().replace('THE ', '')
@@ -389,6 +455,7 @@ export default React.memo(function Library(): JSX.Element {
     gog,
     amazon,
     sideloadedLibrary,
+    xboxGames,
     zoom
   ])
 
@@ -404,29 +471,39 @@ export default React.memo(function Library(): JSX.Element {
     if (storesFilters['legendary'] && epic.username) {
       displayedStores.push('legendary')
     }
-    if (storesFilters['nile'] && amazon.username) {
+    if (storesFilters['nile'] && (amazon.username || amazon.user_id)) {
       displayedStores.push('nile')
     }
     if (storesFilters['sideload']) {
       displayedStores.push('sideload')
+    }
+    if (storesFilters['xbox']) {
+      displayedStores.push('xbox')
     }
     if (storesFilters['zoom'] && zoom.username) {
       displayedStores.push('zoom')
     }
 
     if (!displayedStores.length) {
-      displayedStores = Object.keys(storesFilters)
+      displayedStores = ['legendary', 'gog', 'nile', 'sideload', 'xbox', 'zoom']
     }
 
     const showEpic = epic.username && displayedStores.includes('legendary')
     const showGog = gog.username && displayedStores.includes('gog')
-    const showAmazon = amazon.user_id && displayedStores.includes('nile')
+    const showAmazon =
+      (amazon.user_id || amazon.username) && displayedStores.includes('nile')
     const showSideloaded = displayedStores.includes('sideload')
     const showZoom = zoom.username && displayedStores.includes('zoom')
+    const showXbox = displayedStores.includes('xbox')
 
     const epicLibrary = showEpic ? epic.library : []
     const gogLibrary = showGog ? gog.library : []
-    const sideloadedApps = showSideloaded ? sideloadedLibrary : []
+    const sideloadedApps = showSideloaded
+      ? sideloadedLibrary.map((g) => ({
+          ...g,
+          is_installed: g.is_installed !== undefined ? g.is_installed : true
+        }))
+      : []
     const amazonLibrary = showAmazon ? amazon.library : []
     const zoomLibrary = showZoom ? zoom.library : []
 
@@ -435,7 +512,8 @@ export default React.memo(function Library(): JSX.Element {
       ...epicLibrary,
       ...gogLibrary,
       ...amazonLibrary,
-      ...zoomLibrary
+      ...zoomLibrary,
+      ...(showXbox ? xboxGames : [])
     ]
   }
 
@@ -571,6 +649,7 @@ export default React.memo(function Library(): JSX.Element {
     amazon.library,
     zoom.library,
     sideloadedLibrary,
+    xboxGames,
     platform,
     filterText,
     showHidden,

@@ -207,6 +207,7 @@ export interface SettingsContextType {
 }
 
 export interface StoresFilters {
+  xbox?: boolean
   legendary: boolean
   gog: boolean
   nile: boolean

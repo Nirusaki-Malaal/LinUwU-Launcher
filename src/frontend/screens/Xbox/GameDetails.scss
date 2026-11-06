@@ -1,0 +1,237 @@
+/* These dialogs are portalled outside the Xbox page, so their layout is self-contained. */
+.XboxGameDetailsModal .XboxGameDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  padding-top: 12px;
+}
+.XboxGameDetails {
+  > .Tabs {
+    flex-shrink: 0;
+    margin: 0;
+  }
+  .XboxDetailPane {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+  }
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+  h3 {
+    font-size: var(--body-lg, 18px);
+    font-weight: 600;
+  }
+  p {
+    line-height: 1.65;
+  }
+  .XboxDetailToolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .XboxDetailToolbar p {
+    margin-top: 6px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+  .XboxDetailLog {
+    margin: 0;
+    padding: 18px;
+    max-height: 52vh;
+    min-height: 180px;
+    overflow: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    user-select: text;
+    -webkit-user-select: text;
+    cursor: text;
+    font: 13px/1.65 monospace;
+    background: var(--background, #0b1016);
+    border: 1px solid var(--border-default, #343c3e);
+    border-radius: 12px;
+  }
+  .XboxCopyStatus {
+    min-height: 18px;
+    color: var(--text-secondary);
+    font-size: 12px;
+  }
+  .XboxOverviewHero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: 260px;
+    display: flex;
+    align-items: end;
+    border-radius: 16px;
+    background: linear-gradient(
+      120deg,
+      var(--input-background),
+      color-mix(in srgb, var(--accent) 15%, var(--background))
+    );
+  }
+  .XboxOverviewArt {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .XboxOverviewHero::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: linear-gradient(
+      0deg,
+      rgba(5, 9, 15, 0.97),
+      rgba(5, 9, 15, 0.2)
+    );
+  }
+  .XboxOverviewHeroContent {
+    padding: clamp(20px, 3vw, 32px);
+    color: #fff;
+  }
+  .XboxOverviewEyebrow {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #bfeef5;
+  }
+  .XboxOverviewHero h2 {
+    margin: 8px 0;
+    font-size: clamp(24px, 3vw, 36px);
+    line-height: 1.15;
+  }
+  .XboxOverviewHero p {
+    color: #d0d6de;
+  }
+  .XboxOverviewPrimary {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+  }
+  .XboxOverviewFacts {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .XboxOverviewFacts span {
+    background: var(--input-background);
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .XboxOverviewGallery,
+  .XboxOverviewAbout,
+  .XboxOverviewManagement {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+  .XboxOverviewAbout p {
+    color: var(--text-secondary);
+    white-space: pre-line;
+  }
+  .XboxDescriptionClamped {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .XboxOverviewAbout > .Button {
+    align-self: start;
+  }
+  .XboxDetailScreenshots {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .XboxDetailScreenshots button {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 16 / 9;
+    padding: 0;
+    border: 1px solid var(--border-default, #343c3e);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--background);
+    cursor: pointer;
+  }
+  .XboxDetailScreenshots img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .XboxDetailScreenshots button span {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 18px 10px 8px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 1.4;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+    opacity: 0;
+  }
+  .XboxDetailScreenshots button:hover span,
+  .XboxDetailScreenshots button:focus-visible span {
+    opacity: 1;
+  }
+  .XboxDetailScreenshots button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .XboxOverviewManagement {
+    border-top: 1px solid var(--border-default, #343c3e);
+    padding-top: 24px;
+  }
+  .XboxDetailActions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .XboxOverviewDanger {
+    padding-top: 8px;
+  }
+  .XboxDetailList > .Button {
+    align-self: start;
+  }
+  .XboxDetailList .SettingRow {
+    padding-block: 16px;
+  }
+}
+.XboxScreenshotModal .XboxDetailFullScreenshot {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 10px;
+}
+@media (max-width: 700px) {
+  .XboxGameDetails .XboxDetailScreenshots {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .XboxGameDetails .XboxOverviewHero {
+    min-height: 220px;
+  }
+}
+
+.XboxGameDetails .XboxOverviewGallery > .Button {
+  align-self: flex-start;
+}

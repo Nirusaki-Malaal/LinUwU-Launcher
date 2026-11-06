@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import './index.css'
 
 interface RunnerProps {
   loginUrl: string
+  loginAction?: () => Promise<void>
+  afterActions?: ReactNode
   class: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any
@@ -38,6 +40,10 @@ export default function Runner(props: RunnerProps) {
       return
     }
 
+    if (props.loginAction) {
+      void props.loginAction()
+      return
+    }
     navigate(props.loginUrl)
   }
 
@@ -85,6 +91,7 @@ export default function Runner(props: RunnerProps) {
             </div>
           )}
         </div>
+        {props.afterActions}
       </div>
       {props.alternativeLoginAction && !props.isLoggedIn && (
         <div className={`runnerWrapper ${props.disabled ? 'disabled' : ''}`}>

@@ -1,0 +1,129 @@
+.XboxProfileLoading {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 380px;
+  padding: clamp(24px, 3vw, 40px);
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--input-background, #20252d);
+}
+.XboxProfileSkeleton {
+  display: grid;
+  gap: 28px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.XboxProfileSkeleton span {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  background: color-mix(in srgb, currentColor 7%, transparent);
+  border-radius: 10px;
+}
+.XboxProfileSkeleton span::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 15%,
+    color-mix(in srgb, currentColor 10%, transparent) 50%,
+    transparent 85%
+  );
+  transform: translateX(-100%);
+  animation: xbox-profile-shimmer 1.65s ease-in-out infinite;
+}
+.XboxProfileSkeletonHero {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.XboxProfileSkeleton .XboxProfileSkeletonAvatar {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  flex: 0 0 92px;
+}
+.XboxProfileSkeletonIdentity {
+  display: grid;
+  gap: 13px;
+  flex: 1;
+}
+.XboxProfileSkeletonIdentity span:first-child {
+  width: min(70%, 280px);
+  height: 28px;
+}
+.XboxProfileSkeletonIdentity span:last-child {
+  width: min(45%, 180px);
+  height: 15px;
+}
+.XboxProfileSkeletonStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.XboxProfileSkeletonStats span {
+  height: 54px;
+}
+.XboxProfileSkeletonBody {
+  display: grid;
+  gap: 13px;
+}
+.XboxProfileSkeletonBody span {
+  height: 15px;
+}
+.XboxProfileSkeletonBody span:nth-child(2) {
+  width: 82%;
+}
+.XboxProfileSkeletonBody span:last-child {
+  width: 60%;
+}
+.XboxProfileLoadingLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-secondary, #bec7ce);
+  font: inherit;
+  margin-top: 32px;
+}
+.XboxProfileLoadingSpinner {
+  width: 18px;
+  height: 18px;
+  color: var(--accent, #67dbea);
+  animation: xbox-profile-spin 0.9s linear infinite;
+}
+.XboxProfileReady {
+  animation: xbox-profile-reveal 180ms ease-out both;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 16px;
+}
+@keyframes xbox-profile-shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes xbox-profile-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes xbox-profile-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .XboxProfileSkeleton span::after,
+  .XboxProfileLoadingSpinner,
+  .XboxProfileReady {
+    animation: none;
+  }
+}

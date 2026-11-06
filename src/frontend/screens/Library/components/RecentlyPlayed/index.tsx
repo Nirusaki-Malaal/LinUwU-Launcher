@@ -1,3 +1,5 @@
+import { useXboxSnapshot } from '../../../Xbox/Content'
+import { projectXboxGame } from 'common/xbox-library'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
@@ -41,6 +43,7 @@ export default React.memo(function RecentlyPlayed({
   showHidden
 }: Props) {
   const { t } = useTranslation()
+  const { data: xbox } = useXboxSnapshot()
   const { epic, gog, sideloadedLibrary, amazon, zoom } =
     useContext(ContextProvider)
   const [recentGames, setRecentGames] = useState<GameInfo[]>([])
@@ -56,7 +59,8 @@ export default React.memo(function RecentlyPlayed({
         ...gog.library,
         ...sideloadedLibrary,
         ...amazon.library,
-        ...zoom.library
+        ...zoom.library,
+        ...(xbox?.games || []).map(projectXboxGame)
       ],
       maxRecentGames,
       onlyInstalled
@@ -87,6 +91,7 @@ export default React.memo(function RecentlyPlayed({
     gog.library,
     amazon.library,
     zoom.library,
+    xbox?.games,
     sideloadedLibrary,
     hiddenGames,
     showHidden

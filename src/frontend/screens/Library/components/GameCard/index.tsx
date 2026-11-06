@@ -1,3 +1,4 @@
+import XboxHeroicGameCard from 'frontend/screens/Xbox/HeroicGameCard'
 import './index.css'
 
 import { useContext, CSSProperties, useMemo, useState, useEffect } from 'react'
@@ -598,4 +599,6 @@ const GameCard = ({
   }
 }
 
-export default GameCard
+export default function UnifiedGameCard(props: Card) {
+  return props.gameInfo.xboxGameId ? <XboxHeroicGameCard {...props} /> : <GameCard {...props} />
+}

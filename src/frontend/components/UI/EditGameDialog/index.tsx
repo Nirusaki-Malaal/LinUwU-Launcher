@@ -42,6 +42,31 @@ export default function EditGameDialog({ gameInfo, backdropClick }: Props) {
   const [artSquare, setArtSquare] = useState(
     gameInfo.overrides?.art_square || gameInfo.art_square
   )
+  const [executable, setExecutable] = useState(
+    gameInfo.install.executable || ''
+  )
+  const [saveError, setSaveError] = useState<string>()
+  const [saving, setSaving] = useState(false)
+  const [xboxSideloaded, setXboxSideloaded] = useState(false)
+  useEffect(() => {
+    if (!gameInfo.xboxGameId) return
+    let active = true
+    void window.launcher
+      .getSnapshot()
+      .then((snapshot) => {
+        if (active)
+          setXboxSideloaded(
+            !!snapshot.games.find((game) => game.id === gameInfo.xboxGameId)
+              ?.sideloaded
+          )
+      })
+      .catch((error) => {
+        if (active) setSaveError(String(error))
+      })
+    return () => {
+      active = false
+    }
+  }, [gameInfo.xboxGameId])
   const [hasSgdbKey, setHasSgdbKey] = useState(false)
   const [sgdbTarget, setSgdbTarget] = useState<SgdbTarget>(null)
 
@@ -49,17 +74,27 @@ export default function EditGameDialog({ gameInfo, backdropClick }: Props) {
     void window.api.steamgriddb.hasApiKey().then(setHasSgdbKey)
   }, [])
 
-  const handleSave = () => {
-    // Drop fields that match the original game info — the backend deletes
-    // the override entry when all three are empty, which is what we want
-    // after the user resets.
-    window.api.setGameMetadataOverride({
-      appName: gameInfo.app_name,
-      title: title === gameInfo.title ? '' : title,
-      art_cover: artCover === gameInfo.art_cover ? '' : artCover,
-      art_square: artSquare === gameInfo.art_square ? '' : artSquare
-    })
-    backdropClick()
+  const handleSave = async () => {
+    setSaving(true)
+    setSaveError(undefined)
+    try {
+      if (gameInfo.xboxGameId && xboxSideloaded)
+        await window.launcher.updateGame(gameInfo.xboxGameId, { executable })
+      // Drop fields that match the original game info — the backend deletes
+      // the override entry when all three are empty, which is what we want
+      // after the user resets.
+      window.api.setGameMetadataOverride({
+        appName: gameInfo.app_name,
+        title: title === gameInfo.title ? '' : title,
+        art_cover: artCover === gameInfo.art_cover ? '' : artCover,
+        art_square: artSquare === gameInfo.art_square ? '' : artSquare
+      })
+      backdropClick()
+    } catch (error) {
+      setSaveError(String(error))
+    } finally {
+      setSaving(false)
+    }
   }
 
   const handleReset = () => {
@@ -99,6 +134,15 @@ export default function EditGameDialog({ gameInfo, backdropClick }: Props) {
             value={title}
             maxLength={40}
           />
+          {xboxSideloaded && (
+            <TextInputField
+              htmlId="edit-xbox-executable"
+              label="Executable (relative to game folder)"
+              value={executable}
+              onChange={setExecutable}
+            />
+          )}
+          {saveError && <p role="alert">{saveError}</p>}
           <details className="advancedFields">
             <summary>{t('edit-game.advanced', 'Advanced')}</summary>
             <TextInputWithIconField
@@ -209,7 +253,9 @@ export default function EditGameDialog({ gameInfo, backdropClick }: Props) {
         </div>
       </div>
       <ModalFooter>
-        <Button onClick={handleSave}>{t('button.finish', 'Finish')}</Button>
+        <Button disabled={saving} onClick={() => void handleSave()}>
+          {t('button.finish', 'Finish')}
+        </Button>
         {hasOverride && (
           <Button variant="secondary" onClick={handleReset}>
             {t('edit-game.reset', 'Reset to default')}

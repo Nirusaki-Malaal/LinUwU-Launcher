@@ -77,3 +77,8 @@
     display: none;
   }
 }
+
+.DownloadManager__activeList { width: 100%; display: flex; flex-direction: column; gap: 24px; }
+.DownloadManager__activeItem + .DownloadManager__activeItem { padding-top: 24px; border-top: 1px solid var(--divider); }
+.DownloadItem__title.XboxDownloadTitle { padding: 0; border: 0; background: transparent; color: inherit; font-family: inherit; text-align: start; }
+.DownloadItem__title.XboxDownloadTitle:disabled { cursor: default; opacity: 1; }

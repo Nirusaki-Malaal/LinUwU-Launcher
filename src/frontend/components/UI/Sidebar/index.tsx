@@ -158,7 +158,15 @@ export default memo(function Sidebar() {
       id="heroic-sidebar"
     >
       <div className="Sidebar__brand">
-        <HeroicIcon className="heroicIcon" />
+        <div className="Sidebar__brandHeader">
+          <HeroicIcon className="heroicIcon" />
+          {!collapsed && (
+            <div className="Sidebar__brandMeta">
+              <span className="Sidebar__brandTitle">LinUwU</span>
+              <span className="Sidebar__brandTagline">The last launcher you will need</span>
+            </div>
+          )}
+        </div>
         <button
           type="button"
           className="Sidebar__collapseToggle"

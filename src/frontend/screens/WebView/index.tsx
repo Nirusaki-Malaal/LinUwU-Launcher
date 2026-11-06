@@ -31,6 +31,8 @@ const validStoredUrl = (url: string, store: string) => {
       return url.includes('gaming.amazon.com')
     case 'zoom':
       return url.includes('zoom-platform.com')
+    case 'steamrip':
+      return url.includes('steamrip.com')
     default:
       return false
   }
@@ -92,6 +94,7 @@ export default function WebView() {
     '/store/gog': gogStore,
     '/store/amazon': amazonStore,
     '/store/zoom': zoomStore,
+    '/store/steamrip': 'https://steamrip.com',
     '/wiki': wikiURL,
     '/loginEpic': epicLoginUrl,
     '/loginGOG': gogLoginUrl,

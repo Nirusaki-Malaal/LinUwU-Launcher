@@ -1,5 +1,6 @@
 import { faXbox } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { XboxAccountSummary } from 'frontend/screens/Xbox/Content'
 import {
   Gamepad2,
   Settings as SettingsIcon,
@@ -104,6 +105,13 @@ export default function SidebarLinks() {
         />
         {inWebviewScreen && (
           <div className="SidebarSubmenu">
+            {platform === 'linux' && (
+              <SidebarItem
+                className="SidebarLinks__subItem"
+                url="/store/xbox"
+                label="Xbox & Microsoft Store"
+              />
+            )}
             <SidebarItem
               className="SidebarLinks__subItem"
               url="/store/epic"
@@ -126,17 +134,14 @@ export default function SidebarLinks() {
                 label={t('zoom-store', 'Zoom Store')}
               />
             )}
+            <SidebarItem
+              className="SidebarLinks__subItem"
+              url="/store/steamrip"
+              label="SteamRIP"
+            />
           </div>
         )}
       </div>
-      {platform === 'linux' && (
-        <SidebarItem
-          url="/xbox"
-          icon={<FontAwesomeIcon icon={faXbox} />}
-          label="Xbox"
-          dataTour="sidebar-xbox"
-        />
-      )}
       <SidebarItem
         url="/discounts"
         icon={<Icon glyph={Tag} />}
@@ -192,6 +197,14 @@ export default function SidebarLinks() {
         />
       )}
 
+      {platform === 'linux' && (
+        <SidebarItem
+          url="/xbox/friends"
+          icon={<FontAwesomeIcon icon={faXbox} className="XboxSidebarLogo" />}
+          label="Xbox"
+        />
+      )}
+      {platform === 'linux' && <XboxAccountSummary />}
       <QuitButton dataTour="sidebar-quit" />
 
       {loggedIn && (

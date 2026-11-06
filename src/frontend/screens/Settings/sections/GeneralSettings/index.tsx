@@ -1,3 +1,4 @@
+import XboxDownloadSettings from '../../../DownloadManager/XboxDownloadSettings'
 import { useTranslation } from 'react-i18next'
 import {
   Bell,
@@ -73,6 +74,7 @@ export default function GeneralSettings() {
         <AutoUpdateGames />
         <CheckUpdatesOnStartup />
         <MaxWorkers />
+        {window.platform === 'linux' && <XboxDownloadSettings />}
       </SettingsCard>
 
       <SettingsCard

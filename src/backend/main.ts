@@ -1,11 +1,15 @@
+import {
+  initializeXboxService,
+  launchXboxShortcut
+} from '../integrations/xbox/main'
 import { steamRuntimeStatus } from './onlinefix/status'
-import { nexusXboxRequest } from './xbox/nexus-client'
 import { initImagesCache } from './images_cache'
 import { fetchLastestReleases } from './utils/releases'
 import { DiskSpaceData, StatusPromise, WineInstallation } from 'common/types'
 import * as path from 'path'
 import {
   BrowserWindow,
+  ipcMain,
   Menu,
   app,
   dialog,
@@ -23,6 +27,7 @@ import {
 } from 'backend/ipc'
 import 'backend/updater'
 import 'backend/discounts'
+import 'backend/steamrip'
 import { autoUpdater } from 'electron-updater'
 import { cpus } from 'os'
 import { existsSync, readdirSync, readFileSync } from 'graceful-fs'
@@ -319,6 +324,10 @@ if (!gotTheLock) {
       mainWindow?.show()
     }
 
+    if (mainWindow)
+      void launchXboxShortcut(mainWindow, argv).catch((error) =>
+        logError(['Xbox shortcut:', error], LogPrefix.Backend)
+      )
     handleProtocol(argv)
   })
   app.whenReady().then(async () => {
@@ -468,6 +477,11 @@ addListener('notify', (event, args) => notify(args))
 
 addOneTimeListener('frontendReady', () => {
   logInfo('Frontend Ready', LogPrefix.Backend)
+  const xboxWindow = getMainWindow()
+  if (xboxWindow)
+    void launchXboxShortcut(xboxWindow, process.argv).catch((error) =>
+      logError(['Xbox shortcut:', error], LogPrefix.Backend)
+    )
   handleProtocol([openUrlArgument, ...process.argv])
 
   // skip the download queue if we are running in CLI mode
@@ -648,7 +662,20 @@ addHandler('getMaxCpus', () => cpus().length)
 addHandler('getSteamRuntimeStatus', (_event, args) =>
   steamRuntimeStatus(args.appName, args.runner)
 )
-addHandler('nexusXbox', (_event, request) => nexusXboxRequest(request))
+ipcMain.handle('xbox-nexus:initialize', async (event) => {
+  const window = getMainWindow()
+  const senderUrl = event.sender.getURL().split(/[?#]/)[0]
+  const auxiliary = require('url').pathToFileURL(
+    join(__dirname, '..', 'xbox-native.html')
+  ).href as string
+  if (
+    !window ||
+    event.senderFrame !== event.sender.mainFrame ||
+    (event.sender !== window.webContents && senderUrl !== auxiliary)
+  )
+    throw new Error('Xbox initialization requires a local Heroic window.')
+  await initializeXboxService(window)
+})
 addHandler('getHeroicVersion', () => app.getVersion())
 addHandler('isFullscreen', () => isSteamDeckGameMode || isCLIFullscreen)
 addHandler('getGameOverride', async () =>

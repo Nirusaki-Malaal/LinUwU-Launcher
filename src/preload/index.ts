@@ -1,3 +1,4 @@
+import '../integrations/xbox/preload/index'
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { contextBridge } from 'electron'
 import api from './api'

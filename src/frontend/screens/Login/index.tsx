@@ -1,3 +1,4 @@
+import XboxLoginRow from '../Xbox/LoginRow'
 import React, { useContext, useEffect, useState } from 'react'
 import './index.scss'
 import Runner from './components/Runner'
@@ -161,6 +162,7 @@ export default React.memo(function NewLogin() {
                 disabled={oldMac}
               />
             )}
+            {window.platform === 'linux' && <XboxLoginRow />}
           </div>
         </div>
         <button

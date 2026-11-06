@@ -1,0 +1,29 @@
+import './styles.css'
+import './controls.css'
+import './xbox-social.css'
+import './xbox-party.css'
+import './xbox-desktop-social.css'
+import { installTouchKeyboard } from './touch-keyboard'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+const windows = import.meta.glob<{
+  render: (route: string) => React.ReactNode
+}>('./native-windows/*.tsx', { eager: true })
+installTouchKeyboard(window, (field) =>
+  window.launcher.showTouchKeyboard(field)
+)
+function NativeView() {
+  const [route, setRoute] = React.useState(window.location.hash)
+  React.useEffect(() => {
+    const changed = () => setRoute(window.location.hash)
+    window.addEventListener('hashchange', changed)
+    return () => window.removeEventListener('hashchange', changed)
+  }, [])
+  for (const view of Object.values(windows)) {
+    const content = view.render(route)
+    if (content) return content
+  }
+  return <p>This window hosts Heroic Xbox chat and party audio.</p>
+}
+ReactDOM.createRoot(document.getElementById('root')!).render(<NativeView />)

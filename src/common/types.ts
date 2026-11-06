@@ -192,6 +192,7 @@ export type GOGAchievement = {
 export type GameAchievement = GOGAchievement
 
 export interface GameInfo {
+  xboxGameId?: string
   runner: 'legendary' | 'gog' | 'sideload' | 'nile' | 'zoom'
   store_url?: string
   app_name: string

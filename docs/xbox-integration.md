@@ -1,15 +1,24 @@
-# Xbox through Xodus Nexus
+# Xbox integration in Heroic
 
-Heroic's Linux sidebar includes **Xbox**. Select **Connect Xodus Nexus** to connect to the installed compatibility fork at https://github.com/Nirusaki-Malaal/xodus-nexus (branch `feat/sideloaded-game-compatibility`). The fork must include Heroic bridge support.
+Xbox services are migrated from the user's xodus-nexus fork into Heroic's main process. The original MIT license, source commit and attribution are preserved in `src/integrations/xbox/`. Heroic owns application startup, navigation, tray, updates, styling and dialogs. There is no separate Nexus launcher process, bridge connection or Connect toggle.
 
-The Xbox page shows the fork's installed library, account status, selected runtime and active game. **Add Windows EXE** opens the fork's existing executable importer; imported games appear on this page. **Play**, **Stop game**, and per-game **OnlineFix compatibility** invoke the fork's existing handlers. **Account, Store & Downloads** opens Nexus for Microsoft sign-in, store installation and runtime management. Store-identified games still use Nexus's account and entitlement checks.
+| Feature                                                                       | Heroic location                                    |
+| ----------------------------------------------------------------------------- | -------------------------------------------------- |
+| Installed, owned and Game Pass games, folder/EXE import                       | Library → Xbox & Microsoft Store                   |
+| Catalog, search, entitlement checks, package selection                        | Stores → Xbox & Microsoft Store                    |
+| Microsoft sign-in, system wallet and offline-PC permissions                   | Stores Login → Xbox / Microsoft account            |
+| Xbox-compatible Wine install, update, upstream snapshot and selection         | Wine Manager → Xbox-compatible Wine                |
+| Xbox service backend, runtime status and location                             | Settings → Runtimes                                |
+| Installations, updates, additional content, pause/resume/cancel and bandwidth | Downloads → Xbox downloads                         |
+| Guide shortcut and overlay settings                                           | Settings → Game Defaults → Other → Xbox Game Bar   |
+| Game folder, market                                                           | Settings → General → Xbox library folders          |
+| Backend source builds, cache limit and diagnostics                            | Settings → Advanced                                |
+| Friends, chat, profiles, parties, voice and invitations                       | Xbox friends & parties; Xbox account notifications |
+| Launch options, language, controller compatibility, Gamescope, MangoHud       | Xbox game → Details & settings → Settings          |
+| Achievements, activity, screenshots, DLC, Visual C++, updates and shortcuts   | Xbox game → Details & settings                     |
 
-This is an integration with Nexus's account and launch stack. Xbox launches use its existing managed Xbox runtime and account service, including sideloading compatibility. They do not use Heroic's ordinary Wine settings or install another runtime. Heroic's Epic/GOG/Amazon and ordinary sideloaded games keep their usual launch flow and their existing OnlineFix option.
+The existing Nexus metadata is imported once into Heroic's private Xbox profile. Subsequent Heroic changes are not overwritten. Installed games, Wine/runtime directories and validated backend binaries are reused at their existing locations. Credentials continue to use the existing system wallet; no tokens are copied into renderer data. New installations default to Heroic's Xbox tools directory. Heroic's Wine selector discovers the selected Xbox Wine executable without downloading another Proton copy.
 
-The bridge uses `~/.config/xodus-nexus/heroic-bridge.sock`, an owner-only Unix socket. It starts only on explicit connection, accepts a small validated command set, and returns a limited snapshot without authentication tokens. Heroic does not read the Nexus keyring or copy account credentials. No TCP service is opened. Test/development profiles may override `HEROIC_NEXUS_PROFILE` and `HEROIC_NEXUS_LAUNCHER`; a custom launcher must already select that profile and accept `--heroic-bridge`.
+IPC channels are namespaced. Native chat and party-media windows retain sender/frame validation and dedicated preloads. Sign-in uses its isolated session and authentication preload. Heroic shortcuts launch the integrated Xbox service directly. Nexus self-updating, its second application window, sidebar, tray and single-instance lock are not imported into Heroic's lifecycle.
 
-The collapse button above the navigation toggles a 68-pixel icons-only sidebar. Its state persists across restarts, links retain accessible labels and hover titles, and the resize handle remains available. The previous expanded width is restored.
-
-## Verification
-
-Backend tests cover bridge request validation, private socket permissions, environment preservation, library projection and errors. The UI test covers collapse/expand and persistence, Xbox connection, installed/sideloaded listings, compatibility changes, launch/stop requests and EXE import through an isolated bridge fixture. The real installed fork was also checked for account, runtime and library connectivity. Real Xbox multiplayer requires a game-specific test.
+Verification covers metadata migration, private permissions, existing Wine discovery, TypeScript/build checks, and UI navigation across Heroic Library, Runtime settings, Wine Manager, Login, Downloads and Xbox social. Live game downloads, multiplayer, cloud-save synchronization and voice require account/game-specific end-to-end verification.

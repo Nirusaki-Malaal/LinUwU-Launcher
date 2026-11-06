@@ -1,0 +1,1863 @@
+.HeroicXbox {
+  .xbox-social.xbox-guide {
+    --social-app: #1a1b1e;
+    --social-surface: #24262a;
+    --social-button: #484e58;
+    --social-hover: #515863;
+    --social-muted: rgba(255, 255, 255, 0.651);
+    --social-divider: rgba(255, 255, 255, 0.122);
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    width: 440px;
+    max-width: 100%;
+    height: min(840px, calc(100vh - 72px));
+    min-height: 520px;
+    margin: 0 auto;
+    background: var(--social-app);
+    color: #fff;
+    font:
+      400 14px/20px system-ui,
+      sans-serif;
+    overflow: hidden;
+  }
+  .xbox-social.xbox-guide.social-overlay {
+    height: 100vh;
+    min-height: 0;
+    width: 100%;
+    margin: 0;
+  }
+  .xbox-guide * {
+    box-sizing: border-box;
+  }
+  .xbox-guide button,
+  .xbox-guide input,
+  .xbox-guide textarea,
+  .xbox-guide select {
+    font: inherit;
+    color: inherit;
+  }
+  .xbox-guide button {
+    cursor: pointer;
+    box-shadow: none;
+  }
+  .xbox-guide button:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+  .xbox-guide button:focus-visible,
+  .xbox-guide input:focus-visible,
+  .xbox-guide textarea:focus-visible,
+  .xbox-guide select:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+  }
+  .xbox-guide button svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  .social-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .social-guide-chrome {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 64px;
+    min-height: 64px;
+    padding: 16px;
+  }
+  .social-chrome-spacer {
+    flex: 1;
+  }
+  .xbox-guide .social-circle-button {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    padding: 7px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+  }
+  .xbox-guide .social-close {
+    background: var(--social-button);
+  }
+  .xbox-guide .social-circle-button:hover {
+    background: var(--social-hover);
+  }
+  .xbox-guide .social-circle-button svg {
+    width: 18px;
+    height: 18px;
+  }
+  .xbox-guide .social-back {
+    margin-left: 0;
+  }
+  .social-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-shrink: 0;
+    height: 66px;
+    padding-top: 6px;
+  }
+  .xbox-guide .social-tabs button {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    padding: 18px;
+    border: 0;
+    border-radius: 4px 4px 0 0;
+    background: transparent;
+  }
+  .xbox-guide .social-tabs button:hover {
+    background: var(--social-button);
+  }
+  .xbox-guide .social-tabs button[aria-selected='true'] {
+    background: transparent;
+  }
+  .xbox-guide .social-tabs button[aria-selected='true']:hover {
+    background: var(--social-button);
+  }
+  .social-tabs button[aria-selected='true']::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #00cc6a;
+    border-radius: 4px;
+  }
+  .social-tabs .social-gamerpic {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    box-shadow: none;
+  }
+  .xbox-guide > .social-profile-controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .xbox-guide.has-own-profile > .social-tabs {
+    padding-right: 56px;
+    gap: 8px;
+  }
+  .social-tabs button[aria-selected='false'] .social-gamerpic {
+    opacity: 0.65;
+  }
+  .social-tabs button:hover .social-gamerpic,
+  .social-tabs button:focus .social-gamerpic {
+    opacity: 1;
+  }
+  .social-guide-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--social-surface);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.349) transparent;
+  }
+  .social-guide-content::-webkit-scrollbar {
+    width: 8px;
+  }
+  .social-guide-content::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.349);
+  }
+  .social-people-pane,
+  .social-chats-pane {
+    padding: 16px 24px 24px;
+  }
+  .xbox-guide h2 {
+    margin: 0;
+    font:
+      400 20px/24px system-ui,
+      sans-serif;
+  }
+  .social-page-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .social-search {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 40px;
+    margin: 16px 0 12px;
+    padding: 0 16px;
+    background: var(--social-button);
+    border-radius: 24px;
+  }
+  .social-search > svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  .xbox-guide .social-search input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+  }
+  .social-search input::placeholder,
+  .social-compose textarea::placeholder {
+    color: #fff;
+    opacity: 1;
+  }
+  .social-search:focus-within {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+  .social-list-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 56px;
+    border-bottom: 1px solid var(--social-divider);
+    margin-bottom: 8px;
+    padding: 12px 8px;
+  }
+  .social-list-heading > span:last-child {
+    color: var(--social-muted);
+  }
+  .social-friends,
+  .social-inbox {
+    display: flex;
+    flex-direction: column;
+  }
+  .xbox-guide .social-person,
+  .xbox-guide .social-conversation {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 72px;
+    padding: 12px 8px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    text-align: left;
+  }
+  .xbox-guide .social-person:hover,
+  .xbox-guide .social-conversation:hover {
+    background: var(--social-hover);
+  }
+  .social-gamerpic {
+    position: relative;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
+    overflow: visible;
+    border-radius: 50%;
+    background: #484e58;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font:
+      600 20px system-ui,
+      sans-serif;
+  }
+  .social-gamerpic img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .social-gamerpic > svg {
+    width: 50%;
+    height: 50%;
+  }
+  .social-gamerpic.is-online::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    bottom: -1px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--social-surface);
+    border-radius: 50%;
+    background: #00cc6a;
+  }
+  .social-person-text,
+  .social-conversation > span:nth-child(2) {
+    flex: 1;
+    min-width: 0;
+  }
+  .social-person strong,
+  .social-conversation strong {
+    font-weight: 700;
+  }
+  .social-person small,
+  .social-conversation small {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .social-gamertag-suffix {
+    color: var(--social-muted);
+    font-weight: 400;
+  }
+  .social-conversation.unread strong {
+    font-weight: 700;
+  }
+  .unread-dot {
+    flex: 0 0 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00cc6a;
+  }
+  .social-empty,
+  .social-notice {
+    color: var(--social-muted);
+    padding: 24px;
+  }
+  .social-loading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    padding: 24px;
+  }
+  .social-loading svg {
+    width: 20px;
+    height: 20px;
+  }
+  .social-error {
+    margin: 16px 24px;
+    padding: 12px;
+    border: 1px solid #b95858;
+    border-radius: 4px;
+    background: #522b2b;
+    overflow-wrap: anywhere;
+  }
+  .social-chat-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    width: 100%;
+    padding: 8px 24px 16px;
+    border: 0;
+    background: var(--social-app);
+    text-align: left;
+  }
+  .social-chat-identity > span:last-child {
+    min-width: 0;
+  }
+  .social-chat-identity strong {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font:
+      400 20px/24px system-ui,
+      sans-serif;
+  }
+  .social-chat-identity small {
+    display: block;
+    color: var(--social-muted);
+  }
+  .social-messages {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px;
+    overflow: auto;
+  }
+  .social-message {
+    max-width: 88%;
+  }
+  .social-message p {
+    margin: 0;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #3a3e46;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .social-message.is-mine {
+    align-self: flex-end;
+  }
+  .social-message.is-mine p {
+    background: #006d3b;
+  }
+  .social-message time {
+    display: block;
+    margin: 4px 4px 0;
+    font-size: 12px;
+    color: var(--social-muted);
+  }
+  .social-message.is-mine time {
+    text-align: right;
+  }
+  .social-message.filtered p {
+    color: var(--social-muted);
+    font-style: italic;
+  }
+  .social-compose {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 16px 24px;
+    background: var(--social-surface);
+  }
+  .xbox-guide .social-compose textarea {
+    flex: 1;
+    min-width: 0;
+    min-height: 40px;
+    max-height: 140px;
+    resize: vertical;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 20px;
+    background: var(--social-button);
+    box-shadow: none;
+  }
+  .xbox-guide .social-compose button {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    padding: 10px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+  }
+  .xbox-guide .social-compose button:hover {
+    background: var(--social-hover);
+  }
+  .xbox-guide.has-profile {
+    background: var(--social-app);
+  }
+  .social-guide-content.profile-content {
+    background: var(--social-app);
+  }
+  .social-player-card {
+    position: relative;
+    flex: 1;
+    z-index: 0;
+    padding: 0;
+  }
+  .social-profile-scrollable {
+    padding: 16px 24px 24px;
+  }
+  .social-profile-backdrop {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 396px;
+    background-size: cover;
+    background-position: center top;
+    pointer-events: none;
+  }
+  .social-profile-backdrop::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(26, 27, 30, 0.55),
+      rgba(26, 27, 30, 0.75) 51%,
+      #1a1b1e
+    );
+  }
+  .social-profile-hero {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  .social-gamerpic.social-profile-picture {
+    width: 128px;
+    height: 128px;
+    font-size: 48px;
+  }
+  .social-profile-identity {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 100%;
+  }
+  .social-profile-identity h2 {
+    overflow-wrap: anywhere;
+  }
+  .social-profile-identity p {
+    margin: 0;
+    color: var(--social-muted);
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .social-profile-details {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 48px;
+    margin-top: 16px;
+  }
+  .social-profile-details > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .social-profile-details svg {
+    width: 16px;
+    height: 16px;
+  }
+  .social-score-icon {
+    display: grid;
+    place-items: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    color: #1a1b1e;
+    font:
+      bold 11px/16px system-ui,
+      sans-serif;
+  }
+  .social-profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 4px 16px;
+    border-bottom: 1px solid var(--social-divider);
+  }
+  .xbox-guide .social-menu-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    text-align: left;
+  }
+  .xbox-guide .social-menu-action:hover {
+    background: var(--social-hover);
+  }
+  .social-menu-action svg {
+    width: 16px;
+    height: 16px;
+  }
+  .social-profile-favourite {
+    margin: 20px 12px;
+    color: var(--social-muted);
+  }
+  .social-profile-notice {
+    margin: 16px 12px;
+    color: var(--social-muted);
+  }
+  .social-party {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px 24px 24px;
+  }
+  .social-party[hidden] {
+    display: none;
+  }
+  .social-party-status,
+  .social-party-controls,
+  .social-party-member,
+  .social-party-invite > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .social-party-status > svg {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+  .social-party-status small,
+  .social-party-existing > small {
+    display: block;
+    margin-top: 6px;
+    color: var(--social-muted);
+  }
+  .social-party button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .social-party button > svg {
+    width: 18px;
+    height: 18px;
+  }
+  .social-party-controls {
+    flex-wrap: wrap;
+  }
+  .xbox-guide .social-party button,
+  .xbox-guide .social-party select {
+    min-height: 40px;
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--social-button);
+  }
+  .xbox-guide .social-party button:hover {
+    background: var(--social-hover);
+  }
+  .xbox-guide .social-party select {
+    appearance: none;
+  }
+  .xbox-guide .social-party .primary {
+    background: #008746;
+    color: #fff;
+  }
+  .xbox-guide .social-party .primary:hover {
+    background: #00a85a;
+  }
+  .social-party .social-error {
+    margin: 0;
+  }
+  .social-party-members h2,
+  .social-party-invitations h2 {
+    margin-bottom: 16px;
+    font-size: 20px;
+  }
+  .social-party-member {
+    justify-content: space-between;
+    min-height: 64px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--social-divider);
+  }
+  .social-party-member > span {
+    flex: 1;
+  }
+  .social-party-member small {
+    display: block;
+    margin-top: 4px;
+    color: var(--social-muted);
+  }
+  .social-party-member > .social-gamerpic {
+    flex: none;
+  }
+  .social-party-invite label {
+    display: block;
+    margin-bottom: 12px;
+  }
+  .social-party-invite select {
+    flex: 1;
+    min-width: 0;
+  }
+  .social-party-invite > small {
+    display: block;
+    margin-top: 10px;
+    color: #71bb88;
+  }
+  .social-party-invitations article {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--social-divider);
+  }
+  .social-party-invitations small {
+    display: block;
+    color: var(--social-muted);
+  }
+
+  .social-person-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+  }
+  .social-person-row .social-person {
+    flex: 1;
+    min-width: 0;
+  }
+  .social-person-row:hover {
+    background: var(--social-hover);
+  }
+  .xbox-guide .social-person-more {
+    flex: 0 0 32px;
+  }
+  .social-person-menu {
+    position: absolute;
+    right: 0;
+    top: 58px;
+    z-index: 20;
+    width: 304px;
+    max-width: calc(100vw - 64px);
+    padding: 8px;
+    border: 1px solid var(--social-divider);
+    border-radius: 4px;
+    background: #292c31;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  }
+  .social-person-menu .social-menu-action {
+    padding: 9px 12px;
+  }
+  .social-people-selector {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 12px 0;
+  }
+  .xbox-guide .social-people-selector select {
+    flex: 1;
+    min-width: 0;
+    appearance: none;
+    padding: 10px 14px;
+    border: 1px solid var(--social-divider);
+    border-radius: 4px;
+    background: var(--social-button);
+  }
+  .social-people-selector button,
+  .social-people-search-submit,
+  .social-people-load-more {
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--social-button);
+  }
+  .social-people-selector button:hover,
+  .social-people-search-submit:hover,
+  .social-people-load-more:hover {
+    background: var(--social-hover);
+  }
+  .social-search .social-people-search-submit {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    padding: 4px;
+    min-height: 28px;
+    border-radius: 50%;
+    background: transparent;
+  }
+  .social-people-search-submit svg {
+    width: 18px;
+    height: 18px;
+  }
+  .social-people-load-more {
+    margin-top: 16px;
+  }
+  .social-player-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 0;
+  }
+  .social-player-actions .social-error {
+    margin: 8px 0;
+    font-size: 13px;
+  }
+  .social-action-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 10px;
+    color: var(--social-muted);
+    font-size: 13px;
+  }
+  .social-action-status svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .social-action-confirmation {
+    margin: 8px;
+    padding: 12px;
+    border: 1px solid #6b707a;
+    border-radius: 4px;
+    background: #202226;
+  }
+  .social-action-confirmation p {
+    margin: 0 0 12px;
+  }
+  .social-action-confirmation > div {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .xbox-guide .social-action-confirmation button {
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--social-button);
+  }
+  .xbox-guide .social-action-confirmation button:hover {
+    background: var(--social-hover);
+  }
+  .social-profile-columns {
+    display: flex;
+    flex-direction: column;
+  }
+  .social-profile-about h3,
+  .social-profile-games h3 {
+    margin: 20px 0 12px;
+    font:
+      400 20px/24px system-ui,
+      sans-serif;
+  }
+  .social-profile-bio {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .social-profile-location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--social-muted);
+  }
+  .social-profile-location svg {
+    width: 16px;
+    height: 16px;
+  }
+  .social-profile-counts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--social-divider);
+  }
+  .social-profile-counts > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .social-profile-counts strong {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .social-profile-counts span {
+    color: var(--social-muted);
+  }
+  .social-profile-private {
+    color: var(--social-muted);
+  }
+  .xbox-profile-desktop {
+    height: 100vh;
+    overflow: hidden;
+    background: #1a1b1e;
+  }
+  .xbox-social.xbox-guide.social-expanded-view {
+    width: 100%;
+    height: 100vh;
+    min-height: 0;
+    max-width: none;
+    margin: 0;
+  }
+  .social-expanded-view .social-people-pane,
+  .social-expanded-view .social-chats-pane {
+    width: min(700px, 100%);
+    margin: 0 auto;
+  }
+  .social-player-expanded .social-profile-scrollable {
+    padding: 24px 48px 48px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .social-player-expanded .social-profile-hero {
+    flex-direction: row;
+    gap: 28px;
+    text-align: left;
+  }
+  .social-player-expanded .social-profile-picture {
+    width: 160px;
+    height: 160px;
+  }
+  .social-player-expanded .social-profile-identity h2 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+  .social-player-expanded .social-profile-details {
+    gap: 24px;
+    margin: 24px 0;
+  }
+  .social-player-expanded .social-profile-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 40px;
+    align-items: start;
+  }
+  .social-player-expanded .social-profile-backdrop {
+    height: 460px;
+  }
+  .social-player-expanded .social-profile-about h3:first-child {
+    margin-top: 8px;
+  }
+  .social-profile-game-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .social-profile-game {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--social-divider);
+  }
+  .social-profile-game > img,
+  .social-profile-game-placeholder {
+    width: 72px;
+    height: 96px;
+    flex: 0 0 auto;
+    object-fit: cover;
+    border-radius: 4px;
+    background: #33383e;
+  }
+  .social-profile-game-placeholder {
+    display: grid;
+    place-items: center;
+  }
+  .social-profile-game-placeholder svg {
+    width: 32px;
+    height: 32px;
+  }
+  .social-profile-game h4 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .social-profile-game p {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 4px 0;
+    color: var(--social-muted);
+    font-size: 13px;
+  }
+  @media (max-width: 900px) {
+    .social-player-expanded .social-profile-scrollable {
+      padding: 20px 28px 40px;
+    }
+    .social-player-expanded .social-profile-columns {
+      grid-template-columns: minmax(0, 1fr) 240px;
+      gap: 24px;
+    }
+    .social-player-expanded .social-profile-identity h2 {
+      font-size: 30px;
+      line-height: 38px;
+    }
+  }
+  .social-people-search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .social-people-search-form .social-search {
+    flex: 1;
+    min-width: 0;
+  }
+  .social-people-search-form .social-people-search-submit {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .social-people-search-hint {
+    margin: 4px 0 12px;
+    color: var(--social-muted);
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .social-person-reason,
+  .social-person-last-seen {
+    color: var(--social-muted);
+    font-size: 12px !important;
+  }
+  .social-people-selector select {
+    padding-right: 38px !important;
+  }
+  .social-people-selector {
+    position: relative;
+  }
+  .social-people-selector::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: calc(50% - 5px);
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg);
+    pointer-events: none;
+  }
+  .social-chat-header .social-chat-identity .social-gamerpic {
+    width: 40px;
+    height: 40px;
+  }
+  .social-chat-header .social-chat-identity strong {
+    font:
+      600 16px/22px system-ui,
+      sans-serif;
+  }
+  .social-chat-header .social-chat-identity small {
+    font-size: 12px;
+  }
+  .social-inline-chat {
+    overflow: hidden;
+  }
+  .social-chat .social-compose {
+    gap: 6px;
+    padding: 12px 16px;
+  }
+  .social-chat .social-compose textarea {
+    min-height: 40px;
+  }
+  .xbox-social.xbox-guide.xbox-chat-desktop {
+    width: 100%;
+    height: 100vh;
+    min-height: 0;
+    max-width: none;
+  }
+
+  .social-runtime-invites {
+    padding: 10px 16px;
+    max-height: 180px;
+    overflow: auto;
+    border-block: 1px solid #ffffff20;
+    flex-shrink: 0;
+  }
+  .social-runtime-invites article {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-block: 8px;
+  }
+  .social-runtime-invites strong,
+  .social-runtime-invites small {
+    width: 100%;
+  }
+  .social-runtime-invites button,
+  .social-runtime-invites select {
+    font: inherit;
+    color: inherit;
+    background: #292d32;
+    border: 1px solid #65686d;
+    border-radius: 4px;
+    padding: 6px 9px;
+  }
+  .social-runtime-invites button:disabled {
+    opacity: 0.5;
+  }
+
+  .social-party {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px 24px 24px;
+  }
+  .social-party[hidden] {
+    display: none;
+  }
+  .social-party-status,
+  .social-party-controls,
+  .social-party-member,
+  .social-party-invite > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .social-party-status > svg {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+  .social-party-status small,
+  .social-party-existing > small {
+    display: block;
+    margin-top: 6px;
+    color: var(--social-muted);
+  }
+  .social-party button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .social-party button > svg {
+    width: 18px;
+    height: 18px;
+  }
+  .social-party-controls {
+    flex-wrap: wrap;
+  }
+  .xbox-guide .social-party button,
+  .xbox-guide .social-party select {
+    min-height: 40px;
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--social-button);
+  }
+  .xbox-guide .social-party button:hover {
+    background: var(--social-hover);
+  }
+  .xbox-guide .social-party select {
+    appearance: none;
+  }
+  .xbox-guide .social-party .primary {
+    background: #008746;
+    color: #fff;
+  }
+  .xbox-guide .social-party .primary:hover {
+    background: #00a85a;
+  }
+  .social-party .social-error {
+    margin: 0;
+  }
+  .social-party-members h2,
+  .social-party-invitations h2 {
+    margin-bottom: 16px;
+    font-size: 20px;
+  }
+  .social-party-member {
+    justify-content: space-between;
+    min-height: 64px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--social-divider);
+  }
+  .social-party-member > span {
+    flex: 1;
+  }
+  .social-party-member small {
+    display: block;
+    margin-top: 4px;
+    color: var(--social-muted);
+  }
+  .social-party-member > .social-gamerpic {
+    flex: none;
+  }
+  .social-party-invite label {
+    display: block;
+    margin-bottom: 12px;
+  }
+  .social-party-invite select {
+    flex: 1;
+    min-width: 0;
+  }
+  .social-party-invite > small {
+    display: block;
+    margin-top: 10px;
+    color: #71bb88;
+  }
+  .social-party-invitations article {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--social-divider);
+  }
+  .social-party-invitations small {
+    display: block;
+    color: var(--social-muted);
+  }
+
+  .content-shell {
+    position: relative;
+  }
+  .nexus-social-shelf {
+    position: absolute;
+    z-index: 31;
+    right: 0;
+    top: 62px;
+    bottom: 60px;
+    width: 440px;
+    max-width: 100%;
+    overflow: hidden;
+    transform: translateX(100%);
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      visibility 0s linear 180ms;
+    box-shadow: -8px 0 36px #0006;
+  }
+  .nexus-social-shelf.is-open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .nexus-social-shelf > .xbox-social.xbox-guide.social-overlay {
+    height: 100%;
+  }
+  .nexus-social-scrim {
+    position: absolute;
+    z-index: 30;
+    inset: 62px 0 0;
+    border: 0;
+    border-radius: 0;
+    background: #0003;
+    cursor: default;
+  }
+  .page-scroll.social-full-page {
+    overflow: hidden;
+  }
+  .nexus-social-page {
+    height: 100%;
+    min-height: 0;
+  }
+  .nexus-social-page > .xbox-social.xbox-guide.social-expanded-view {
+    height: 100%;
+  }
+  .nexus-social-toggle {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    z-index: 32;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 36px;
+    padding: 8px 12px;
+    border: 1px solid #4b5056;
+    border-radius: 4px;
+    background: #25292e;
+    color: #f4f4f4;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .nexus-social-toggle > span {
+    white-space: nowrap;
+  }
+  .nexus-social-toggle > svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .nexus-social-toggle.is-open > svg:last-child {
+    transform: rotate(180deg);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nexus-social-shelf {
+      transition: none;
+    }
+  }
+
+  .content-shell > .page-scroll {
+    padding-bottom: 72px;
+  }
+
+  .settings-card.compact.settings-language {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .settings-language > label {
+    display: grid;
+    gap: 8px;
+    min-width: 240px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .settings-language select {
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--canvas);
+    color: inherit;
+    font: inherit;
+  }
+  .settings-language .save-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .settings-language .save-row > span {
+    max-width: 360px;
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .settings-card.settings-guide {
+    padding: 0;
+  }
+  .settings-guide > summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 24px;
+    list-style: none;
+    cursor: pointer;
+  }
+  .settings-guide > summary::-webkit-details-marker {
+    display: none;
+  }
+  .settings-guide > summary:hover {
+    background: var(--surface-hover);
+  }
+  .settings-guide > summary:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: -3px;
+  }
+  .settings-guide > summary > svg {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+    color: var(--muted);
+  }
+  .settings-guide > summary > svg:last-child {
+    margin-left: 4px;
+    transition: transform 0.15s;
+  }
+  .settings-guide[open] > summary > svg:last-child {
+    transform: rotate(90deg);
+  }
+  .guide-summary-text {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+  }
+  .guide-summary-text strong {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .guide-summary-text small {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .guide-state {
+    margin-left: auto;
+    padding: 4px 9px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .guide-state.on {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #b5e2a3;
+    border-color: #5c934d;
+    background: #2d4029;
+    font-weight: 600;
+  }
+  .guide-state.on::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #91d46e;
+  }
+  .guide-settings-content {
+    padding: 0 24px 20px;
+    border-top: 1px solid var(--line);
+  }
+  .guide-settings-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    min-width: 0;
+    margin: 0;
+    padding: 2px 0 20px;
+    border: 0;
+  }
+  .guide-settings-fields > label {
+    display: grid;
+    grid-template-rows: auto 40px auto;
+    align-content: start;
+    gap: 8px;
+    min-width: 0;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .guide-settings-fields input,
+  .guide-settings-fields select {
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--canvas);
+    color: inherit;
+    font: inherit;
+  }
+  .guide-settings-fields input {
+    font-family: ui-monospace, monospace;
+  }
+  .guide-settings-fields small {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .guide-settings-fields:disabled {
+    opacity: 0.5;
+  }
+  .guide-settings-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .guide-settings-footer p {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .guide-settings-footer .status-dot,
+  .guide-disabled-dot {
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .guide-disabled-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+  .guide-settings-footer button {
+    flex-shrink: 0;
+  }
+  @media (max-width: 700px) {
+    .settings-card.compact.settings-language {
+      align-items: stretch;
+      gap: 14px;
+    }
+    .settings-language > label {
+      min-width: 0;
+      width: 100%;
+    }
+    .settings-language .save-row {
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .guide-settings-fields {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .guide-settings-footer {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .guide-settings-footer button {
+      align-self: flex-end;
+    }
+  }
+
+  .guide-shortcut-recorder {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--canvas);
+    color: inherit;
+    cursor: pointer;
+  }
+  .guide-shortcut-recorder > svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--muted);
+  }
+  .guide-shortcut-recorder kbd {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font:
+      12px ui-monospace,
+      monospace;
+  }
+  .guide-shortcut-recorder > span {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .guide-shortcut-recorder[aria-pressed='true'] {
+    border-color: var(--green);
+    outline: 1px solid var(--green);
+  }
+  .guide-shortcut-recorder:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+  }
+
+  .account-header {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    position: relative;
+  }
+  .account-header .account-summary {
+    flex: 1;
+    min-width: 0;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 8px;
+  }
+  .notifications {
+    flex: 0 0 36px;
+  }
+  .notification-bell {
+    width: 36px;
+    height: 38px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+  .notification-bell:hover,
+  .notification-bell[aria-expanded='true'] {
+    background: #3a3e44;
+  }
+  .notification-bell > svg {
+    width: 19px;
+    height: 19px;
+  }
+  .notification-badge {
+    position: absolute;
+    top: 1px;
+    right: 0;
+    min-width: 15px;
+    padding: 1px 3px;
+    border-radius: 4px;
+    background: #378a39;
+    border: 1px solid #272a30;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 13px;
+  }
+  .notification-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: min(360px, calc(100vw - 32px));
+    max-height: min(560px, calc(100vh - 110px));
+    overflow: auto;
+    z-index: 75;
+    border: 1px solid #4b5058;
+    border-radius: 7px;
+    background: #25292e;
+    box-shadow: 0 12px 38px #0009;
+  }
+  .notification-panel header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-bottom: 1px solid #3d4248;
+  }
+  .notification-panel h2 {
+    margin: 0;
+    font-size: 17px;
+  }
+  .notification-panel header button {
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 3px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+  .notification-panel header svg {
+    width: 17px;
+    height: 17px;
+  }
+  .notification-panel > p {
+    padding: 8px 16px;
+    color: #bac0c7;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  /* Keep the padded controller ring clear of the panel's scrolling clip and
+   adjacent notification backgrounds. */
+  .notification-panel ul {
+    list-style: none;
+    padding: 8px;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .notification-panel li button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 13px 10px;
+    border: 0;
+    border-radius: 4px;
+    text-align: left;
+    background: transparent;
+    cursor: pointer;
+  }
+  .notification-panel li button:hover {
+    background: #393f47;
+  }
+  .notification-panel li button.unread {
+    background: #30382f;
+  }
+  .notification-panel li button.unread:hover {
+    background: #3a4936;
+  }
+  .notification-panel li svg {
+    flex: 0 0 20px;
+    width: 20px;
+    color: #b9c6b3;
+  }
+  .notification-panel li span {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    gap: 5px;
+  }
+  .notification-panel strong {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+  .notification-panel small {
+    font-size: 11px;
+    color: #bac0c7;
+  }
+  .notification-panel i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #83cc6b;
+    flex: 0 0 6px;
+  }
+
+  --green: var(--accent, #bcebf5);
+  --surface: var(--background-lighter, #161b1c);
+  --canvas: var(--background, #0b0e0e);
+  --muted: var(--text-secondary, #aeb8b8);
+  --line: var(--border-default, #343c3e);
+  color: var(--text-default);
+  font: inherit;
+  background: transparent;
+  min-width: 0;
+  .settings-card {
+    margin-block: var(--space-lg, 20px);
+  }
+  .textInputFieldWrapper {
+    margin-block: 16px;
+  }
+}
+.XboxActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-block: 16px;
+}
+.XboxLibrary {
+  padding: var(--space-xl, 24px);
+}
+.XboxSearch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-block: 20px;
+}
+.XboxSearch .textInputFieldWrapper {
+  flex: 1;
+}
+.XboxGameGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+.XboxGameCard {
+  min-width: 0;
+  overflow: hidden;
+}
+.XboxGameCard > img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.XboxGameCard h3 {
+  margin-top: 16px;
+  font-size: var(--body-lg, 18px);
+}
+.XboxScreenshots {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+}
+.XboxScreenshots img {
+  width: 220px;
+}
+.HeroicXbox__account {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+  overflow: visible;
+}
+.HeroicXbox__account > button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  padding: 6px;
+  background: transparent;
+  color: inherit;
+  min-width: 0;
+}
+.Sidebar.collapsed .HeroicXbox__account {
+  display: none;
+}
+
+.HeroicXbox > .SettingsCard + .SettingsCard {
+  margin-top: 20px;
+}
+
+.LibraryRoute > .Tabs {
+  margin-inline: var(--space-md-fixed);
+}
+
+/* Desktop social is a Heroic page, independent of the compact in-game guide. */
+.HeroicXbox[data-xbox-section="social"] { padding: var(--space-3xl-fixed) var(--space-5xl-fixed); max-width: 1600px; margin: 0 auto; }
+.HeroicXbox[data-xbox-section="social"] > .PageHeader { margin-bottom: var(--space-xl, 24px); }
+.HeroicXbox .xbox-social.xbox-guide.heroic-social { width: 100%; max-width: none; min-height: 0; height: auto; margin: 0; background: transparent; color: var(--text-default); font-family: inherit; font-size: var(--body-md); line-height: 1.5; overflow: visible; --social-app: var(--background); --social-surface: transparent; --social-button: var(--input-background); --social-hover: var(--background-lighter); --social-muted: var(--text-secondary); --social-divider: var(--border-default, #343c3e); }
+.HeroicXbox .heroic-social > .social-guide-chrome { display: none; }
+.HeroicXbox .heroic-social > .Tabs { width: 100%; margin-bottom: 24px; }
+.HeroicXbox .heroic-social .social-guide-content { background: transparent; overflow: visible; min-height: 0; }
+.HeroicXbox .heroic-social .social-people-pane, .HeroicXbox .heroic-social .social-chats-pane, .HeroicXbox .heroic-social .social-party { padding: 0; }
+.HeroicXbox .heroic-social h2 { font-family: inherit; font-weight: var(--weight-bold, 600); font-size: var(--text-xl, 22px); }
+.HeroicXbox .heroic-social .social-people-selector { max-width: 360px; margin-block: 20px; }
+.HeroicXbox .heroic-social input, .HeroicXbox .heroic-social select, .HeroicXbox .heroic-social textarea { background: var(--input-background); border: 1px solid var(--border-default, #343c3e); border-radius: var(--radius-md, 12px); color: var(--text-default); font: inherit; min-height: 44px; padding: 10px 16px; }
+.HeroicXbox .heroic-social .social-people-search-form { max-width: 850px; margin-block: 16px 8px; gap: 12px; }
+.HeroicXbox .heroic-social .social-search { background: var(--input-background); border-radius: 999px; padding: 0 16px; }
+.HeroicXbox .heroic-social .social-search input { border: none; background: transparent; }
+.HeroicXbox .heroic-social .social-people-search-submit { background: var(--accent); color: #071014; border-radius: 999px; font-family: inherit; font-weight: 600; padding: 12px 24px; }
+.HeroicXbox .heroic-social .social-people-search-hint { text-align: left; margin-bottom: 24px; }
+.HeroicXbox .heroic-social .social-friends, .HeroicXbox .heroic-social .social-inbox { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.HeroicXbox .heroic-social .social-person-row { border: 1px solid var(--border-default, #343c3e); border-radius: var(--radius-md, 12px); background: var(--input-background); padding: 8px; }
+.HeroicXbox .heroic-social .social-person { padding: 8px; min-width: 0; font-family: inherit; }
+.HeroicXbox .heroic-social .social-person-text { min-width: 0; }
+.HeroicXbox .heroic-social .social-person-text small { white-space: normal; overflow-wrap: anywhere; }
+.HeroicXbox .heroic-social .social-gamerpic { width: 48px; height: 48px; }
+.HeroicXbox .heroic-social .social-profile-picture { width: 112px; height: 112px; }
+.HeroicXbox .heroic-social .social-profile-scrollable { max-width: 1000px; margin: 0 auto; width: 100%; }
+.HeroicXbox .heroic-social .social-party button, .HeroicXbox .heroic-social .social-chat-send { border-radius: var(--radius-md, 12px); font-family: inherit; }
+.HeroicXbox .heroic-social .social-party .primary { background: var(--accent); color: #071014; }
+.XboxStoreBadge { position: absolute; top: 12px; right: 12px; z-index: 2; color: #107c10; }
+.XboxStoreBadge svg { width: 100%; height: 100%; }
+.runnerWrapper.xbox .runnerIcon { color: #107c10; padding: 12px; }
+.runnerWrapper.xbox .runnerIcon svg { height: 100%; }
+.runnerWrapper.xbox > .Button { flex-shrink: 0; margin-inline: 8px; }
+@media(max-width: 1100px) { .HeroicXbox[data-xbox-section="social"] { padding: var(--space-xl-fixed) var(--space-lg-fixed); } .HeroicXbox .heroic-social .social-friends { grid-template-columns: 1fr; } }
+
+/* Stretch the desktop page itself; auto side margins previously shrink-wrapped it. */
+.HeroicXbox[data-xbox-section="social"] {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  box-sizing: border-box;
+  flex: 1 0 auto;
+  padding: clamp(24px, 3vw, 48px);
+}
+.XboxPageHeading { display: flex; gap: 18px; align-items: center; margin-bottom: 28px; }
+.XboxPageMark { display: grid; place-items: center; width: 56px; height: 56px; flex-shrink: 0; color: var(--accent); }
+.XboxPageMark svg { width: 48px; height: 48px; }
+.XboxPageHeading .PageHeader { min-width: 0; }
+.XboxSidebarLogo { width: 22px; height: 22px; }
+.HeroicXbox .XboxSocialPanel { width: 100%; padding: clamp(20px, 2vw, 32px); overflow: visible; }
+.HeroicXbox .xbox-social.xbox-guide.heroic-social { width: 100%; max-width: none; margin: 0; }
+.XboxSocialOverview { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 26px; margin-bottom: 24px; border-radius: 18px; border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); background: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%), linear-gradient(120deg, var(--input-background), transparent); }
+.XboxSocialIdentity { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.HeroicXbox .heroic-social .XboxSocialIdentity .social-gamerpic { width: 76px; height: 76px; flex-shrink: 0; border: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); }
+.XboxSocialEyebrow { font-size: 11px; letter-spacing: .14em; font-weight: 700; color: var(--accent); }
+.HeroicXbox .heroic-social .XboxSocialIdentity h2 { font-size: clamp(20px, 2vw, 28px); margin: 4px 0 8px; overflow-wrap: anywhere; }
+.XboxSocialSignedIn { display: inline-flex; gap: 8px; align-items: center; font-size: 13px; color: var(--text-secondary); }
+.XboxSocialSignedIn i { width: 7px; height: 7px; border-radius: 50%; background: #5cce75; }
+.XboxSocialStats { display: flex; align-items: center; gap: clamp(20px, 3vw, 48px); }
+.XboxSocialStats > div { display: grid; gap: 5px; text-align: center; min-width: 70px; }
+.XboxSocialStats strong { font-size: 26px; line-height: 1.1; }
+.XboxSocialStats span { color: var(--text-secondary); font-size: 12px; }
+.XboxSocialStats svg { width: 28px; height: 28px; justify-self: center; color: var(--accent); }
+.HeroicXbox .heroic-social .social-people-pane { display: grid; grid-template-columns: minmax(220px, 320px) minmax(0, 1fr); gap: 16px 24px; align-items: start; }
+.HeroicXbox .heroic-social .social-page-heading { grid-column: 1 / -1; }
+.HeroicXbox .heroic-social .social-people-selector { width: 100%; max-width: none; margin: 0; }
+.HeroicXbox .heroic-social .social-people-search-form { width: 100%; max-width: none; margin: 0; }
+.HeroicXbox .heroic-social .social-people-search-hint { grid-column: 2; margin: -6px 0 8px; }
+.HeroicXbox .heroic-social .social-list-heading, .HeroicXbox .heroic-social .social-friends, .HeroicXbox .heroic-social .social-empty, .HeroicXbox .heroic-social .social-error { grid-column: 1 / -1; }
+.HeroicXbox .heroic-social .social-friends { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 18px; }
+.HeroicXbox .heroic-social .social-person-row { transition: background-color 140ms ease, border-color 140ms ease; }
+.HeroicXbox .heroic-social .social-person-row:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--divider)); background: var(--background-lighter); }
+.HeroicXbox .heroic-social .social-person-row .social-person { width: 100%; }
+.runnerWrapper.xbox .runnerIcon { padding: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.runnerWrapper.xbox .runnerIcon svg { width: 36px; height: 36px; flex: none; }
+@media(max-width: 900px) {
+  .XboxSocialOverview { flex-wrap: wrap; gap: 20px; }
+  .XboxSocialStats { width: 100%; justify-content: space-around; }
+  .HeroicXbox .heroic-social .social-people-pane { grid-template-columns: 1fr; }
+  .HeroicXbox .heroic-social .social-people-search-hint { grid-column: 1; }
+}
+
+.HeroicXbox .heroic-social .social-profile-backdrop { height: 220px; opacity: .3; filter: blur(26px); inset: 0 -26px auto; background-position: center 30%; }
+.HeroicXbox .heroic-social .XboxProfileLoading { min-height: 380px; }
+.XboxGameGrid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
+.XboxActions.XboxStoreActions { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 8px; }
+.XboxStoreActions > .Button { flex: 1 1 auto; min-width: 0; padding-inline: 10px; white-space: nowrap; font-size: var(--body-sm, 13px); }

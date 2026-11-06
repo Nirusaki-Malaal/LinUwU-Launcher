@@ -1,3 +1,4 @@
+import { xboxWineInstallation } from 'backend/xbox/wine-discovery'
 import { needsHostSteamClient } from 'backend/onlinefix/runtime'
 import { GlobalConfig } from 'backend/config'
 import { logError, LogPrefix, logInfo } from 'backend/logger'
@@ -200,7 +201,14 @@ export async function getLinuxWineSet(
     customWineSet = getCustomWinePaths()
   }
 
-  return new Set([...proton, ...altWine, ...defaultWineSet, ...customWineSet])
+  const xboxWine = await xboxWineInstallation()
+  return new Set([
+    ...proton,
+    ...altWine,
+    ...defaultWineSet,
+    ...customWineSet,
+    ...(xboxWine ? [xboxWine] : [])
+  ])
 }
 
 /// --------------- MACOS ------------------

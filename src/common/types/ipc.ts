@@ -1,5 +1,5 @@
 import type { SteamRuntimeStatus } from './steam-runtime'
-import type { NexusXboxRequest, NexusXboxSnapshot } from './xbox'
+import type { SteamRipCatalog, SyncResult } from './steamrip'
 import type { OpenDialogOptions, TitleBarOverlay } from 'electron'
 
 import type { SystemInformation } from 'backend/utils/systeminfo'
@@ -155,11 +155,12 @@ interface TestSyncIPCFunctions {
 
 // ts-prune-ignore-next
 interface AsyncIPCFunctions {
+  getSteamRipCatalog: () => Promise<SteamRipCatalog>
+  syncSteamRipCatalog: (url?: string) => Promise<SyncResult>
   getSteamRuntimeStatus: (args: {
     appName: string
     runner: Runner
   }) => Promise<SteamRuntimeStatus>
-  nexusXbox: (request: NexusXboxRequest) => Promise<NexusXboxSnapshot>
   kill: (appName: string, runner: Runner) => Promise<void>
   checkDiskSpace: (folder: string) => Promise<DiskSpaceData>
   callTool: (args: Tools) => Promise<void>
